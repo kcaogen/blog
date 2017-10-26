@@ -11,5 +11,11 @@
 <script th:src="@{~/js/jquery-2.0.3.min.js}"/>
 <script th:src="@{~/js/echarts.min.js}"/>
 <script th:src="@{~/js/china.js}"/>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    var data = JSON.parse([[${cityListJson}]]);
+    var geoCoordMap = JSON.parse([[${geoCoordMap}]]);
+    /*]]>*/
+</script>
 <script th:src="@{~/js/show/blogAccessShow.js}"/>
 </html>

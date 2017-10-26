@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.caogen.blog.dao.ShowMapperDao">
+
+	<select id="findAllCity" resultType="java.util.HashMap">
+	 	/*select @rownum:=@rownum+1 rownum,codes,visitors,percentage,cityName,id from
+		(
+		select @rownum:=0 rownum, codes,visitors,
+		CONCAT(round((visitors/(select sum(visitors) from k_city))*100,2),'%') as percentage,cityName,id  
+		from k_city order by visitors desc 
+		)t*/
+		SELECT cityName AS name,visitors AS value FROM k_city WHERE visitors != 0
+	</select>
+	
+	<update id="updateCityCount">
+	     update k_city set visitors = visitors + 1 where cityname = #{cityname}
+     </update>
+
+</mapper>

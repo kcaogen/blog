@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.caogen.blog.dao.BlogDao">
+
+	<select id="getAllBlog" resultType="com.caogen.blog.entity.Blog">
+		SELECT * FROM k_blog
+	</select>
+
+	<select id="getAllBlogType" resultType="com.caogen.blog.entity.BlogType">
+		SELECT * FROM k_blogType
+	</select>
+
+	<select id="getAllBlogTag" resultType="com.caogen.blog.entity.BlogTag">
+		SELECT * FROM k_blogTag
+	</select>
+
+	<insert id="insertBlog" useGeneratedKeys="true" keyProperty="blogId"
+		parameterType="com.caogen.blog.entity.Blog">
+		INSERT INTO k_blog
+		(blogName, introduction, content,time,
+		blogType, browse, praise, reprintedUrl)
+		VALUES
+		(#{blogName}, #{introduction},
+		#{content}, #{time}, #{blogType}, #{browse}, #{praise}, #{reprintedUrl})
+	</insert>
+
+	<insert id="insertBlogTag" parameterType="java.util.List">
+		INSERT INTO k_blog_tag(blogId, tagId)
+		VALUES
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			(#{item.blogId}, #{item.tagId} )
+		</foreach>
+	</insert>
+
+	<select id="getBlogInfoById" resultType="com.caogen.blog.entity.Blog" parameterType="int">
+		SELECT * FROM k_blog WHERE blogId = #{blogId}
+	</select>
+	
+	<select id="getTagListById" resultType="String" parameterType="int">
+		SELECT tagName FROM k_blogTag kb
+		INNER JOIN k_blog_tag kbt ON kb.tagId = kbt.tagId
+		WHERE blogId = #{blogId}
+	</select>
+	
+	<select id="getAllBlogId" resultType="String" parameterType="String">
+		SELECT blogId from k_blog 
+		<if test="_parameter != null and _parameter !=''">
+			WHERE blogType = #{blogType}
+		</if>
+		ORDER BY blogId DESC
+	</select>
+	
+	<select id="getNewBlog" resultType="com.caogen.blog.entity.Blog">
+		SELECT blogId, blogName from k_blog ORDER BY blogId DESC LIMIT  5
+	</select>
+
+	<update id="updateBlogNum" parameterType="java.util.List">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE k_blog 
+			<set>
+			  browse = #{item.browse}
+			</set>
+			WHERE blogId = #{item.blogId}
+		 </foreach>
+	</update>
+	
+	<select id="getTagList" resultType="java.util.HashMap">
+		SELECT tagName, blogId FROM k_blogTag kb
+		INNER JOIN k_blog_tag kbt ON kb.tagId = kbt.tagId
+	</select>
+</mapper>
+ 
+ 

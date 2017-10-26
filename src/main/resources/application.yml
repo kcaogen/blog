@@ -2,3 +2,25 @@ server:
   port: 8080
   context-path: /
 
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/caogenBlog?useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: caogen
+
+mybatis:
+  config-location: classpath:mybatis-config.xml
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.caogen.blog.entity
+
+jedis :
+  pool :
+    host : 127.0.0.1
+    port : 6379
+    password : caogen
+    timeout : 60000
+    config :
+      maxTotal: 100
+      maxIdle: 10
+      maxWaitMillis : 100000

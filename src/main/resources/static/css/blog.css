@@ -1,0 +1,47 @@
+
+body {
+	margin-top: 75px;
+}
+
+
+footer {
+	margin: 10px 0;
+}
+
+#comments, #comments li {
+    margin: 0;
+    padding: 0;
+}
+
+#comments li {
+    list-style: none;
+}
+        
+.photo {
+	margin-bottom: 10px;
+}
+
+.social-buttons button {
+	margin-top: 5px;
+}
+
+.load-more {
+    width: 100%;
+    height: 40px;
+    margin: 30px auto 60px;
+    padding: 10px 15px;
+    text-align: center;
+    font-size: 15px;
+    border-radius: 4px;
+    color: #fff;
+    background-color: #a5a5a5;
+    display: block;
+    text-decoration:none;
+    outline:none;
+}
+.load-more:hover, .load-more:visited, .load-more:active {
+	color:#fff;
+	background:#9b9b9b;
+	outline:none;
+	text-decoration:none;
+}
