@@ -1,0 +1,64 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta content="text/html;charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <title>博客首页</title>
+    <link th:href="@{/GeekBlog/css/github-markdown.css}" rel="stylesheet"/>
+    <link th:href="@{/GeekBlog/css/style.css}" rel="stylesheet"/>
+
+</head>
+<body>
+<header>
+    <section class="head-content">
+        <a class="head-pic-a">
+            <img class="head-pic" th:src="@{/GeekBlog/img/head.png}"/>
+        </a>
+        <section class="links-of-author">
+            <span class="links-of-author-item item-name">
+                 <a>康草根</a>
+            </span>
+            <span class="links-of-author-item item">
+                 <a th:href="@{/blog}">
+                    Blog
+                 </a>
+            </span>
+            <span class="links-of-author-item item">
+                 <a th:href="@{https://github.com/IsResultXaL}" target="_blank">
+                    Github
+                 </a>
+            </span>
+            <span class="links-of-author-item item">
+                 <a th:href="@{https://www.zhihu.com/people/Grassroots}" target="_blank">
+                    知乎
+                 </a>
+            </span>
+            <span class="links-of-author-item item">
+                  <a th:href="@{http://music.163.com/#/playlist?id=94401961}" target="_blank">
+                    网易云音乐
+                  </a>
+            </span>
+            <span class="links-of-author-item item">
+                  <a th:href="@{/show/blog}" target="_blank">
+                    热点统计
+                  </a>
+            </span>
+        </section>
+    </section>
+</header>
+<section class="content">
+    <section class="terminal center">
+        <canvas id="terminal-canvas"></canvas>
+    </section>
+</section>
+<div class="center bg">
+    <canvas id="bg-canvas"></canvas>
+</div>
+</body>
+<script th:src="@{/js/jquery-2.0.3.min.js}"/>
+<script th:src="@{/GeekBlog/js/components.js}"/>
+<script th:src="@{/GeekBlog/js/utils.js}"/>
+<script th:src="@{/GeekBlog/js/handler.js}"/>
+<script th:src="@{/GeekBlog/js/terminal.js}"/>
+<script th:src="@{/GeekBlog/js/hacker.js}"/>
+<script th:src="@{/GeekBlog/js/index.js}"/>
+</html>
