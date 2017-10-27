@@ -57,7 +57,7 @@ public class BlogController {
             logger.error("goBlog:" + e);
             e.printStackTrace();
         }finally {
-            return "/blog/blogList";
+            return "blog/blogList";
         }
     }
 
@@ -81,7 +81,7 @@ public class BlogController {
             logger.error("goBlog:" + e);
             e.printStackTrace();
         }finally {
-            return "/blog/blogList";
+            return "blog/blogList";
         }
     }
 
@@ -132,7 +132,7 @@ public class BlogController {
         } catch (Exception e) {
             logger.error("goBlogInfo:" + e);
         }finally {
-            return "/blog/blogInfo";
+            return "blog/blogInfo";
         }
 
     }

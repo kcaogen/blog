@@ -24,3 +24,6 @@ jedis :
       maxTotal: 100
       maxIdle: 10
       maxWaitMillis : 100000
+
+logging:
+  path: D:/logs/blog

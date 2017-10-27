@@ -13,7 +13,7 @@ public class IndexController {
 
     @GetMapping(value = "/404")
     public String go404() {
-        return "/error/404";
+        return "error/404";
     }
 
 }

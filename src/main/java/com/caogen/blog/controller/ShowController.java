@@ -38,7 +38,7 @@ public class ShowController {
             logger.error("blogAccessShow:" + e);
             e.printStackTrace();
         }finally {
-            return "/show/blogAccessShow";
+            return "show/blogAccessShow";
         }
     }
 
