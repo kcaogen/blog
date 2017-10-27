@@ -5,10 +5,57 @@
     <meta content="text/html;charset=UTF-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
     <title>blog</title>
+    <!--每页单独引入的文件在head里面写,要不然只加载母版的js，不加载单独引入的 -->
+    <script th:src="@{/js/jsrender.js}"/>
+    <script th:src="@{/js/blog/blogList.js}"/>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        $(function () {
+            blogList.init({
+                maxPage : parseInt([[${page}]]),
+                page : 1
+            })
+        })
+        /*]]>*/
+    </script>
 </head>
 <body>
-<div layout:fragment="content">
-    <h2>hello world!!!</h2>
+<div class="col-md-8" layout:fragment="content">
+    <script type="text/x-jsrender" id="blogListJsrender">
+					{{for}}
+						<article>
+							<h2><a href="/blogInfo/{{:blog.blogId}}">{{:blog.blogName}}</a></h2>
+					        <div class="row">
+					          	<div class="col-sm-6 col-md-6">
+					          		<span class="glyphicon glyphicon-folder-open"></span> &nbsp;<a href="javascript:void(0);" onclick="getBlogByType('{{:blog.blogType}}');">{{:blog.blogType}}</a>
+					          		&nbsp;&nbsp;<span class="glyphicon glyphicon-bookmark"></span>
+									<span>{{:tagList}}</span>
+					          	</div>
+					          	<div class="col-sm-6 col-md-6">
+					          		<span class="glyphicon glyphicon-pencil"></span> <a href="javascript:void(0);">{{:blog.browse}}</a>
+					          		&nbsp;&nbsp;<span class="glyphicon glyphicon-time"></span> {{:blog.time}}
+					          	</div>
+					          </div>
+					          <hr/>
+					          <img src="/image/{{:blog.blogImg}}" class="img-responsive" />
+					          <br />
+					          <p class="lead">
+					          	{{:blog.introduction}}
+					          </p>
+							  <p class="text-right">
+						          <a href="/blogInfo/{{:blog.blogId}}">
+						          	阅读更多
+						          </a>
+						      </p>
+					          <hr/>
+						</article>
+					{{/for}}
+				</script>
+    <div id="blogList"></div>
+
+    <ul class="pager" style="display: none;">
+        <a href="javascript:void(0);" class="load-more">加载更多</a>
+    </ul>
 </div>
 </body>
 </html>

@@ -1,6 +1,7 @@
 package com.caogen.blog.controller;
 
 import com.caogen.blog.cache.RedisCache;
+import com.caogen.blog.dto.BlogResult;
 import com.caogen.blog.entity.Blog;
 import com.caogen.blog.entity.BlogTag;
 import com.caogen.blog.entity.BlogType;
@@ -8,10 +9,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.List;
 
 @Controller
@@ -72,6 +73,30 @@ public class BlogController {
         }finally {
             return "/blog/blogList";
         }
+    }
+
+    @PostMapping(value = "/blogList", produces = { "application/json;charset=UTF-8" })
+    @ResponseBody
+    public BlogResult getBlogList(@RequestParam(value="page",defaultValue="1",required=false)int page,
+                                  @RequestParam(value="blogType",defaultValue="",required=false) String blogType) {
+        BlogResult result = null;
+        try {
+            List<String> blogIdList = redisCache.getBlogIdList(page, blogType);
+            if(blogIdList == null || blogIdList.isEmpty()){
+                result = new BlogResult(false, "没有博客数据！");
+                return result;
+            }
+
+            List<HashMap<String, Object>> blogInfoList = redisCache.getBlogInfoList(blogIdList);
+            result = new BlogResult(true, blogInfoList);
+        }catch (Exception e) {
+            result = new BlogResult(false, e.getMessage());
+            logger.error("getBlogList:" + e);
+            e.printStackTrace();
+        }finally {
+            return  result;
+        }
+
     }
 
 }

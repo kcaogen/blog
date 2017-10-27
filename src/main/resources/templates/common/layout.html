@@ -4,8 +4,8 @@
     <meta content="text/html;charset=UTF-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
     <title>layout</title>
-    <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet"/>
-    <link th:href="@{/bootstrap/css/bootstrap-theme.min.css}" rel="stylesheet"/>
+    <link th:href="@{/bootstrap-3.0.3/css/bootstrap.min.css}" rel="stylesheet"/>
+    <link th:href="@{/bootstrap-3.0.3/css/bootstrap-theme.min.css}" rel="stylesheet"/>
     <link th:href="@{/css/blog.css}" rel="stylesheet"/>
     <script th:src="@{/js/jquery-2.0.3.min.js}"/>
 </head>
@@ -29,71 +29,74 @@
                 <button type="button" class="btn btn-default">Submit</button>
             </form>
             <ul class="nav navbar-nav">
-                <li class="active"><a th:href="@{/blog}">博客</a></li>
-                <li><a th:href="@{http://music.163.com/#/playlist?id=94401961}" target="_blank">网易云歌单</a></li>
-                <li><a th:href="@{/cityInfo}" target="_blank">热点统计</a></li>
+                <li class="active"><a th:href="@{/blog}">Blog</a></li>
+                <li><a th:href="@{https://github.com/IsResultXaL}" target="_blank">Github</a></li>
+                <li><a th:href="@{https://www.zhihu.com/people/Grassroots}" target="_blank">知乎</a></li>
+                <li><a th:href="@{http://music.163.com/#/playlist?id=94401961}" target="_blank">网易云音乐</a></li>
+                <li><a th:href="@{/show/blog}" target="_blank">热点统计</a></li>
             </ul>
         </nav>
     </div>
 </header>
 
-<div layout:fragment="content"></div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8" layout:fragment="content"></div>
+        <div class="col-md-4">
+            <div class="well text-center">
+                <p class="lead">访问量：<span th:text="${blogNum}">1000</span></p>
+            </div>
 
-<div class="col-md-4">
-    <div class="well text-center">
-        <p class="lead">访问量：<span th:text="${blogNum}">1000</span></p>
+            <!-- Latest Posts -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4>最新博客</h4>
+                </div>
+                <ul class="list-group">
+                    <li class="list-group-item" th:each="blog,blogStat : ${newBlogList}">
+                        <a th:href="@{'/blogInfo/'+${blog.blogId}}" th:text="${blogStat.count} + '.' + ${blog.blogName}"></a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Categories -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4>博客分类</h4>
+                </div>
+                <ul class="list-group" id="blogTypeList">
+                    <li class="list-group-item" th:each="blog : ${blogTypeList}">
+                        <a th:href="@{'/blog/'+${blog.typeName}}" th:text="${blog.typeName}"></a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Tags -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4>标签</h4>
+                </div>
+                <div class="panel-body">
+                    <ul class="list-inline">
+                        <li th:each="blog : ${blogTagList}" th:text="${blog.tagName}"></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Recent Comments -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4>阅读排行</h4>
+                </div>
+                <ul class="list-group">
+                    <li class="list-group-item" th:each="blog, blogStat : ${readBlogList}">
+                        <a th:href="@{'/blogInfo/'+${blog.blogId}}" th:text="${blogStat.count} + '.' + ${blog.blogName} + '(' + ${blog.browse} + ')' "></a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
     </div>
-
-    <!-- Latest Posts -->
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h4>最新博客</h4>
-        </div>
-        <ul class="list-group">
-                <li class="list-group-item" th:each="blog,blogStat : ${newBlogList}">
-                    <a th:href="@{'/blogInfo/'+${blog.blogId}}" th:text="${blogStat.count} + '.' + ${blog.blogName}"></a>
-                </li>
-        </ul>
-    </div>
-
-    <!--&lt;!&ndash; Categories &ndash;&gt;
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h4>博客分类</h4>
-        </div>
-        <ul class="list-group" id="blogTypeList">
-            <c:forEach items="${blogTypeList}" var="type">
-                <li class="list-group-item"><a href="javascript:void(0);" onclick="getBlogByType('${type.typeName}');">${type.typeName}</a></li>
-            </c:forEach>
-        </ul>
-    </div>
-
-    &lt;!&ndash; Tags &ndash;&gt;
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h4>标签</h4>
-        </div>
-        <div class="panel-body">
-            <ul class="list-inline">
-                <c:forEach items="${blogTagList}" var="tag">
-                    <li>${tag.tagName}</li>
-                </c:forEach>
-            </ul>
-        </div>
-    </div>
-
-    &lt;!&ndash; Recent Comments &ndash;&gt;
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h4>阅读排行</h4>
-        </div>
-        <ul class="list-group">
-            <c:forEach items="${readBlogList}" var="blog" varStatus="blogIndex">
-                <li class="list-group-item"><a href="/blogInfo/${blog.blogId}">${blogIndex.count}. ${blog.blogName} (${blog.browse})</a></li>
-            </c:forEach>
-        </ul>
-    </div>-->
-
 </div>
 
 <footer>
@@ -103,4 +106,15 @@
     </div>
 </footer>
 </body>
+<script th:src="@{/bootstrap-3.0.3/js/bootstrap.min.js}"/>
+<script th:src="@{/js/common/layout.js}"/>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    $(function () {
+        layout.init({
+            blogType : [[${blogType}]]
+        });
+    })
+    /*]]>*/
+</script>
 </html>
