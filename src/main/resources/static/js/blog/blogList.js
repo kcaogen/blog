@@ -27,7 +27,7 @@ var blogList = {
                         $(".pager").show();
                     }
                 }else{
-                    alert(data.error)
+                    layer.msg(data.error, function(){});
                 }
             }
         });

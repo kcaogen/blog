@@ -5,19 +5,6 @@
     <meta content="text/html;charset=UTF-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
     <title>blog</title>
-    <!--每页单独引入的文件在head里面写,要不然只加载母版的js，不加载单独引入的 -->
-    <script th:src="@{/js/jsrender.js}"/>
-    <script th:src="@{/js/blog/blogList.js}"/>
-    <script th:inline="javascript">
-        /*<![CDATA[*/
-        $(function () {
-            blogList.init({
-                maxPage : parseInt([[${page}]]),
-                page : 1
-            })
-        })
-        /*]]>*/
-    </script>
 </head>
 <body>
 <div class="col-md-8" layout:fragment="content">
@@ -27,7 +14,7 @@
 							<h2><a href="/blogInfo/{{:blog.blogId}}">{{:blog.blogName}}</a></h2>
 					        <div class="row">
 					          	<div class="col-sm-6 col-md-6">
-					          		<span class="glyphicon glyphicon-folder-open"></span> &nbsp;<a href="javascript:void(0);" onclick="getBlogByType('{{:blog.blogType}}');">{{:blog.blogType}}</a>
+					          		<span class="glyphicon glyphicon-folder-open"></span> &nbsp;<a href="javascript:void(0);">{{:blog.blogType}}</a>
 					          		&nbsp;&nbsp;<span class="glyphicon glyphicon-bookmark"></span>
 									<span>{{:tagList}}</span>
 					          	</div>
@@ -59,3 +46,18 @@
 </div>
 </body>
 </html>
+<!--每页单独引入的文件在head里面或者html后面写,要不然只加载母版的js，不加载单独引入的 -->
+<script th:src="@{/js/jsrender.js}"/>
+<script th:src="@{/js/blog/blogList.js}"/>
+<script th:src="@{/layer/layer.js}"/>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    $(function () {
+        blogList.init({
+            maxPage : parseInt([[${page}]]),
+            page : 1,
+            blogType : [[${blogType}]]
+        })
+    })
+    /*]]>*/
+</script>

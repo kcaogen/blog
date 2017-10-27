@@ -39,6 +39,11 @@ public class BlogController {
         model.addAttribute("readBlogList", readBlogList);
     }
 
+    /**
+     * 跳转到博客列表
+     * @param model
+     * @return
+     */
     @GetMapping(value = "/blog")
     public String goBlog(Model model) {
         try {
@@ -56,6 +61,11 @@ public class BlogController {
         }
     }
 
+    /**
+     * 跳转到博客列表（带类型）
+     * @param model
+     * @return
+     */
     @GetMapping(value = "/blog/{blogType}")
     public String goBlog(Model model,
                          @PathVariable("blogType") String blogType) {
@@ -75,6 +85,12 @@ public class BlogController {
         }
     }
 
+    /**
+     * 获取博客列表数据
+     * @param page
+     * @param blogType
+     * @return
+     */
     @PostMapping(value = "/blogList", produces = { "application/json;charset=UTF-8" })
     @ResponseBody
     public BlogResult getBlogList(@RequestParam(value="page",defaultValue="1",required=false)int page,
@@ -95,6 +111,28 @@ public class BlogController {
             e.printStackTrace();
         }finally {
             return  result;
+        }
+
+    }
+
+    /**
+     * 获取博客详情
+     * @param model
+     * @param blogId
+     * @return
+     */
+    @GetMapping(value = "/blogInfo/{blogId}")
+    public String goBlogInfo(Model model, @PathVariable("blogId") String blogId) {
+        try {
+            long blogNum = redisCache.getBlogNumById(blogId);
+            HashMap<String, Object> blogInfo = redisCache.getBlogInfo(blogId);
+            model.addAttribute("blogInfo", blogInfo);
+            model.addAttribute("blogNum", blogNum);
+            rightContent(model);
+        } catch (Exception e) {
+            logger.error("goBlogInfo:" + e);
+        }finally {
+            return "/blog/blogInfo";
         }
 
     }
