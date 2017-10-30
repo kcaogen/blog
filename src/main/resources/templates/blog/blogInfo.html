@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
     <title th:text="${blogInfo.blog.blogName }"></title>
     <!--每页单独引入的文件在head里面或者html后面写,要不然只加载母版的js，不加载单独引入的 -->
-    <link th:href="@{/editormd/css/editormd.css}" rel="stylesheet"/>
-    <link th:href="@{/editormd/css/editormd.preview.min.css}" rel="stylesheet"/>
+    <link rel="stylesheet" href="/editormd/css/editormd.css" />
+    <link rel="stylesheet" href="/editormd/css/editormd.preview.min.css" />
     <style type="text/css">
         img{
             width:100%;
@@ -44,41 +44,29 @@
         <li class="previous"><a href="javascript:history.back(-1);">&larr; 返回上一页</a></li>
     </ul>
 
-
-
     <!--畅言PC和WAP自适应版-->
-    <div id="SOHUCS" sid="${blogInfo.blog.blogId }" ></div>
+    <div id="SOHUCS" th:attr="sid=${blogInfo.blog.blogId }" ></div>
     <script th:inline="javascript">
-        /*<![CDATA[*/
         (function(){
             var appid = 'cyt13XpXW';
             var conf = 'prod_cefa158662e825008c7c9105b766f2cb';
             var width = window.innerWidth || document.documentElement.clientWidth;
             if (width < 960) {
                 window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })();
-        /*]]>*/
-    </script>
-
-    <!-- 百度share -->
-    <script th:inline="javascript">
-        /*<![CDATA[*/
-        window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"16"},"slide":{"type":"slide","bdImg":"2","bdPos":"right","bdTop":"100"},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
-        /*]]>*/
     </script>
 </div>
 </body>
 </html>
-<script th:src="@{/editormd/lib/marked.min.js}"/>
-<script th:src="@{/editormd/lib/prettify.min.js}"/>
-<script th:src="@{/editormd/lib/raphael.min.js}"/>
-<script th:src="@{/editormd/lib/underscore.min.js}"/>
-<script th:src="@{/editormd/lib/sequence-diagram.min.js}"/>
-<script th:src="@{/editormd/lib/flowchart.min.js}"/>
-<script th:src="@{/editormd/lib/flowchart.min.js}"/>
-<script th:src="@{/editormd/lib/jquery.flowchart.min.js}"/>
-<script th:src="@{/editormd/editormd.js}"/>
+<script src="/editormd/lib/marked.min.js"></script>
+<script src="/editormd/lib/prettify.min.js"></script>
+<script src="/editormd/lib/raphael.min.js"></script>
+<script src="/editormd/lib/underscore.min.js"></script>
+<script src="/editormd/lib/sequence-diagram.min.js"></script>
+<script src="/editormd/lib/flowchart.min.js"></script>
+<script src="/editormd/lib/flowchart.min.js"></script>
+<script src="/editormd/lib/jquery.flowchart.min.js"></script>
+<script src="/editormd/editormd.js"></script>
 <script th:inline="javascript">
-    /*<![CDATA[*/
     editormd.markdownToHTML("content", {
         htmlDecode      : "style,script,iframe",  // you can filter tags decode
         taskList        : true,
@@ -89,5 +77,4 @@
         tocContainer : "",
         tocDropdown   : false
     });
-    /*]]>*/
 </script>

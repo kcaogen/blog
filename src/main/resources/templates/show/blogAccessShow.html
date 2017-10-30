@@ -8,14 +8,12 @@
 <body>
 <div id="main"></div>
 </body>
-<script th:src="@{~/js/jquery-2.0.3.min.js}"/>
-<script th:src="@{~/js/echarts.min.js}"/>
-<script th:src="@{~/js/china.js}"/>
+<script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/echarts.min.js"></script>
+<script src="/js/china.js"></script>
 <script th:inline="javascript">
-    /*<![CDATA[*/
     var data = JSON.parse([[${cityListJson}]]);
     var geoCoordMap = JSON.parse([[${geoCoordMap}]]);
-    /*]]>*/
 </script>
-<script th:src="@{~/js/show/blogAccessShow.js}"/>
+<script src="/js/show/blogAccessShow.js"></script>
 </html>

@@ -14,9 +14,12 @@ var blogList = {
     },
 
     ajaxBlogList : function (params) {
+        var headers = {};
+        headers['X-CSRF-TOKEN'] = params.token;
         $.ajax({
             type: "POST",
             url: blogList.URL.blogList(),
+            headers: headers,
             data: {"page": params.page, "blogType": params.blogType},
             success:function(data){
                 if(data.result==true){

@@ -5,6 +5,20 @@
     <meta content="text/html;charset=UTF-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
     <title>blog</title>
+    <!--每页单独引入的文件在head里面或者html后面写,要不然只加载母版的js，不加载单独引入的 -->
+    <script src="/js/jsrender.js"></script>
+    <script src="/js/blog/blogList.js"></script>
+    <script src="/layer/layer.js"></script>
+    <script th:inline="javascript">
+        $(function () {
+            blogList.init({
+                maxPage : parseInt([[${page}]]),
+                page : 1,
+                blogType : [[${blogType}]],
+                token : [[${_csrf.token}]]    //Spring Security POST方式下的CSRF验证
+            })
+        })
+    </script>
 </head>
 <body>
 <div class="col-md-8" layout:fragment="content">
@@ -46,18 +60,3 @@
 </div>
 </body>
 </html>
-<!--每页单独引入的文件在head里面或者html后面写,要不然只加载母版的js，不加载单独引入的 -->
-<script th:src="@{/js/jsrender.js}"/>
-<script th:src="@{/js/blog/blogList.js}"/>
-<script th:src="@{/layer/layer.js}"/>
-<script th:inline="javascript">
-    /*<![CDATA[*/
-    $(function () {
-        blogList.init({
-            maxPage : parseInt([[${page}]]),
-            page : 1,
-            blogType : [[${blogType}]]
-        })
-    })
-    /*]]>*/
-</script>

@@ -4,10 +4,10 @@
     <meta content="text/html;charset=UTF-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
     <title>layout</title>
-    <link th:href="@{/bootstrap-3.0.3/css/bootstrap.min.css}" rel="stylesheet"/>
-    <link th:href="@{/bootstrap-3.0.3/css/bootstrap-theme.min.css}" rel="stylesheet"/>
-    <link th:href="@{/css/blog.css}" rel="stylesheet"/>
-    <script th:src="@{/js/jquery-2.0.3.min.js}"/>
+    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" />
+    <link rel="stylesheet" href="/css/blog.css" />
+    <script src="/js/jquery-2.0.3.min.js"></script>
 </head>
 <body>
 <header class="navbar navbar-inverse navbar-fixed-top bs-docs-nav" role="banner">
@@ -19,7 +19,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a th:href="@{/}" class="navbar-brand">康草根</a>
+            <a href="/" class="navbar-brand">康草根</a>
         </div>
         <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
             <form class="navbar-form navbar-right" role="search">
@@ -29,11 +29,11 @@
                 <button type="button" class="btn btn-default">Submit</button>
             </form>
             <ul class="nav navbar-nav">
-                <li class="active"><a th:href="@{/blog}">Blog</a></li>
-                <li><a th:href="@{https://github.com/IsResultXaL}" target="_blank">Github</a></li>
-                <li><a th:href="@{https://www.zhihu.com/people/Grassroots}" target="_blank">知乎</a></li>
-                <li><a th:href="@{http://music.163.com/#/playlist?id=94401961}" target="_blank">网易云音乐</a></li>
-                <li><a th:href="@{/show/blog}" target="_blank">热点统计</a></li>
+                <li class="active"><a href="/blog">Blog</a></li>
+                <li><a href="https://github.com/IsResultXaL" target="_blank">Github</a></li>
+                <li><a href="https://www.zhihu.com/people/Grassroots" target="_blank">知乎</a></li>
+                <li><a href="http://music.163.com/#/playlist?id=94401961" target="_blank">网易云音乐</a></li>
+                <li><a href="/show/blog" target="_blank">热点统计</a></li>
             </ul>
         </nav>
     </div>
@@ -44,7 +44,7 @@
         <div class="col-md-8" layout:fragment="content"></div>
         <div class="col-md-4">
             <div class="well text-center">
-                <p class="lead">访问量：<span th:text="${blogNum}">1000</span></p>
+                <p class="lead">访问量：[[${blogNum}]]</p>
             </div>
 
             <!-- Latest Posts -->
@@ -106,15 +106,13 @@
     </div>
 </footer>
 </body>
-<script th:src="@{/bootstrap-3.0.3/js/bootstrap.min.js}"/>
-<script th:src="@{/js/common/layout.js}"/>
+<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="/js/common/layout.js"></script>
 <script th:inline="javascript">
-    /*<![CDATA[*/
     $(function () {
         layout.init({
             blogType : [[${blogType}]]
         });
     })
-    /*]]>*/
 </script>
 </html>
