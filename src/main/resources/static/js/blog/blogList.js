@@ -9,7 +9,7 @@ var blogList = {
 
     URL : {
         blogList : function () {
-            return "/blogList";
+            return "/blog/list";
         }
     },
 

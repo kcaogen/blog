@@ -17,6 +17,7 @@ import java.util.HashMap;
 import java.util.List;
 
 @Controller
+@RequestMapping(value = "/blog")
 public class BlogController {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -45,7 +46,7 @@ public class BlogController {
      * @param model
      * @return
      */
-    @GetMapping(value = "/blog")
+    @GetMapping(value = "")
     public String goBlog(Model model) {
         try {
             long blogNum = redisCache.getBlogNum();
@@ -67,7 +68,7 @@ public class BlogController {
      * @param model
      * @return
      */
-    @GetMapping(value = "/blog/{blogType}")
+    @GetMapping(value = "/{blogType}")
     public String goBlog(Model model,
                          @PathVariable("blogType") String blogType) {
         try {
@@ -92,7 +93,7 @@ public class BlogController {
      * @param blogType
      * @return
      */
-    @PostMapping(value = "/blogList", produces = { "application/json;charset=UTF-8" })
+    @PostMapping(value = "/list", produces = { "application/json;charset=UTF-8" })
     @ResponseBody
     public BlogResult getBlogList(@RequestParam(value="page",defaultValue="1",required=false)int page,
                                   @RequestParam(value="blogType",defaultValue="",required=false) String blogType) {
@@ -122,7 +123,7 @@ public class BlogController {
      * @param blogId
      * @return
      */
-    @GetMapping(value = "/blogInfo/{blogId}")
+    @GetMapping(value = "/info/{blogId}")
     public String goBlogInfo(Model model, @PathVariable("blogId") String blogId) {
         try {
             long blogNum = redisCache.getBlogNumById(blogId);

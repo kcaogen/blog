@@ -54,7 +54,7 @@
                 </div>
                 <ul class="list-group">
                     <li class="list-group-item" th:each="blog,blogStat : ${newBlogList}">
-                        <a th:href="@{'/blogInfo/'+${blog.blogId}}" th:text="${blogStat.count} + '.' + ${blog.blogName}"></a>
+                        <a th:href="@{'/blog/info/'+${blog.blogId}}" th:text="${blogStat.count} + '.' + ${blog.blogName}"></a>
                     </li>
                 </ul>
             </div>
@@ -90,7 +90,7 @@
                 </div>
                 <ul class="list-group">
                     <li class="list-group-item" th:each="blog, blogStat : ${readBlogList}">
-                        <a th:href="@{'/blogInfo/'+${blog.blogId}}" th:text="${blogStat.count} + '.' + ${blog.blogName} + '(' + ${blog.browse} + ')' "></a>
+                        <a th:href="@{'/blog/info/'+${blog.blogId}}" th:text="${blogStat.count} + '.' + ${blog.blogName} + '(' + ${blog.browse} + ')' "></a>
                     </li>
                 </ul>
             </div>

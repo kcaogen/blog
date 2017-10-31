@@ -5,7 +5,7 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/caogenBlog?useUnicode=true&characterEncoding=utf-8
+    url: jdbc:mysql://127.0.0.1:3306/caogenBlog?useUnicode=true&characterEncoding=utf-8&useSSL=true
     username: root
     password: caogen
   thymeleaf:

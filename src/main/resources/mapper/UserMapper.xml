@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.caogen.blog.dao.UserDao">
+
+    <select id="getUserByUsername" resultType="UserRole">
+        SELECT u.id,u.userName,u.password,r.role FROM k_user u
+        INNER JOIN k_user_role ur ON ur.userId = u.id
+        INNER JOIN k_role r on r.id = ur.roleId
+        WHERE u.userName = #{userName}
+    </select>
+
+</mapper>

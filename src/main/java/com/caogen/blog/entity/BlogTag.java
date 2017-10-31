@@ -23,4 +23,11 @@ public class BlogTag implements java.io.Serializable {
 		this.tagName = tagName;
 	}
 
+	@Override
+	public String toString() {
+		return "BlogTag{" +
+				"tagId=" + tagId +
+				", tagName='" + tagName + '\'' +
+				'}';
+	}
 }

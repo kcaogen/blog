@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -7,7 +7,7 @@
 
     <title>登录</title>
     <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css" />
     <!-- Custom styles for this template -->
     <link rel="stylesheet" href="/css/admin/signin.css" />
 
@@ -15,10 +15,13 @@
 
 <body>
 <div class="container">
-    <form class="form-signin">
+    <form class="form-signin" th:action="@{/login}" th:method="post">
         <h2 class="form-signin-heading">Please sign in</h2>
-        <input type="email" id="inputEmail" class="form-control" placeholder="Email address">
-        <input type="password" id="inputPassword" class="form-control" placeholder="Password">
+        <input type="email" id="inputEmail" name="username" class="form-control" placeholder="Email address">
+        <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+        <p class="text-danger" th:if="${param.error}">Wrong user or password</p>
+        <p class="text-danger" th:if="${session.SPRING_SECURITY_LAST_EXCEPTION}" th:text="${session.SPRING_SECURITY_LAST_EXCEPTION.message}"></p>
         <div class="checkbox">
             <label>
                 <input type="checkbox" value="remember-me"> Remember me
@@ -28,4 +31,5 @@
     </form>
 </div>
 </body>
+
 </html>

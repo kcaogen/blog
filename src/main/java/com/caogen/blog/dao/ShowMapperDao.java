@@ -8,8 +8,8 @@ import java.util.List;
 @Repository
 public interface ShowMapperDao {
 	
-	public List<HashMap<String,Object>> findAllCity();
+	List<HashMap<String,Object>> findAllCity();
 	
-	public void updateCityCount(String cityName);
+	void updateCityCount(String cityName);
 	
 }

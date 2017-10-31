@@ -103,4 +103,19 @@ public class Blog implements java.io.Serializable {
 		this.reprintedUrl = reprintedUrl;
 	}
 
+	@Override
+	public String toString() {
+		return "Blog{" +
+				"blogId=" + blogId +
+				", blogName='" + blogName + '\'' +
+				", blogImg='" + blogImg + '\'' +
+				", introduction='" + introduction + '\'' +
+				", content='" + content + '\'' +
+				", time='" + time + '\'' +
+				", browse=" + browse +
+				", praise=" + praise +
+				", blogType='" + blogType + '\'' +
+				", reprintedUrl='" + reprintedUrl + '\'' +
+				'}';
+	}
 }

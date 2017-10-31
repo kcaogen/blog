@@ -23,4 +23,11 @@ public class BlogType implements java.io.Serializable {
 		this.typeName = typeName;
 	}
 
+	@Override
+	public String toString() {
+		return "BlogType{" +
+				"typeId=" + typeId +
+				", typeName='" + typeName + '\'' +
+				'}';
+	}
 }
