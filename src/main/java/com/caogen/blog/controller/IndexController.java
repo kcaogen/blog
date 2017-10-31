@@ -12,7 +12,12 @@ public class IndexController {
         return "index";
     }
 
-    @GetMapping(value = "/404")
+    @GetMapping(value = "/login")
+    public String goLogin() {
+        return "admin/login";
+    }
+
+    @GetMapping(value = "/error/404")
     public String go404() {
         return "error/404";
     }

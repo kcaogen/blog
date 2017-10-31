@@ -15,7 +15,7 @@ public class ErrorConfig {
         return new EmbeddedServletContainerCustomizer(){
             @Override
             public void customize(ConfigurableEmbeddedServletContainer container) {
-                container.addErrorPages(new ErrorPage(HttpStatus.NOT_FOUND, "/404"));
+                container.addErrorPages(new ErrorPage(HttpStatus.NOT_FOUND, "/error/404"));
             }
         };
     }

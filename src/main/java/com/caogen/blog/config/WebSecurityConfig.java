@@ -29,11 +29,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/",
                         "/blog/**",
-                        "/show/**").permitAll()
+                        "/show/**",
+                        "/error/**").permitAll()
                 .anyRequest().authenticated().and()
                 .formLogin().loginPage("/login")// 登录url请求路径 (3)
                 .failureUrl("/login?error=true") //登录失败的跳转页面
-                .defaultSuccessUrl("/blog").permitAll().and() // 登录成功跳转路径url(4)
+                .defaultSuccessUrl("/admin").permitAll().and() // 登录成功跳转路径url(4)
                 .logout().permitAll();
 
                 http.logout().logoutSuccessUrl("/"); // 退出默认跳转页面 (5)
