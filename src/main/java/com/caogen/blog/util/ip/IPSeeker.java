@@ -34,8 +34,7 @@ public class IPSeeker {
         }
     }
 
-    private static final String IP_FILE = IPSeeker.class.getResource(
-            "/").toString().substring(5) + "ip/qqwry.dat";
+    private static final String IP_FILE = "/home/caogen/project/blog/qqwry.dat";
 
     // 一些固定常量，比如记录长度等等
     private static final int IP_RECORD_LENGTH = 7;
