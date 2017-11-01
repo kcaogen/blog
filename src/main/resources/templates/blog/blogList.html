@@ -11,11 +11,12 @@
     <script src="/layer/layer.js"></script>
     <script th:inline="javascript">
         $(function () {
+            var token = [[${_csrf.token}]];
             blogList.init({
                 maxPage : parseInt([[${page}]]),
                 page : 1,
                 blogType : [[${blogType}]],
-                token : [[${_csrf.token}]]    //Spring Security POST方式下的CSRF验证
+                token : token    //Spring Security POST方式下的CSRF验证
             })
         })
     </script>
@@ -53,7 +54,6 @@
 					{{/for}}
 				</script>
     <div id="blogList"></div>
-
     <ul class="pager" style="display: none;">
         <a href="javascript:void(0);" class="load-more">加载更多</a>
     </ul>

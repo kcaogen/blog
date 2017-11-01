@@ -42,7 +42,7 @@ create table k_user(
 
 create table k_role(
   id INT primary key not null auto_increment,
-  role VARCHAR(50),
+  role VARCHAR(50)
 );
 
 create table k_user_role(

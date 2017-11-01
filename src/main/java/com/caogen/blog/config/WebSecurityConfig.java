@@ -63,10 +63,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .ignoring()
                 .antMatchers("/css/**",
                         "/editormd/**",
-                        "/GeekBlog/**",
+                        "/index/**",
                         "/image/**",
                         "/js/**",
-                        "/layer/**");
+                        "/layer/**",
+                        "/blogImg/**",
+                        "/favicon.ico");
     }
 
 }

@@ -1,0 +1,8 @@
+.clearfix{display:block;clear:both;float:none;}
+body{display:block;margin:0;padding:0;font-family:'Roboto', sans-serif;}
+
+.video-back{display:block;padding:200px 0px 0px 0px;text-align:center;}
+.video-back h1{display:block;text-align:center;color:#fff;font-size:50px;}
+.video-back p{display:block;color:#fff;margin:0px;padding:0px;margin-bottom:20px;}
+.video-back img{width:150px;}
+.center a{ color: aliceblue; font-family: "微软雅黑"; font-size: 20px; text-decoration: none; padding-left: 10px; padding-right: 10px; font-weight: bold;text-shadow:2px 2px 4px #000; }

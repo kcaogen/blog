@@ -5,12 +5,16 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/caogenBlog?useUnicode=true&characterEncoding=utf-8&useSSL=true
+    url: jdbc:mysql://127.0.0.1:3306/caogenBlog?useUnicode=true&characterEncoding=utf-8&useSSL=false
     username: root
     password: caogen
   thymeleaf:
     mode: HTML
     cache: false
+  mvc:
+    static-path-pattern: /**
+  resources:
+    static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/,file:/home/caogen/project/blog
 
 mybatis:
   config-location: classpath:mybatis-config.xml
@@ -34,5 +38,5 @@ security:
     password: admin
 
 logging:
-  path: D:/logs/blog
+  path: /home/caogen/project/blog/logs/
 
