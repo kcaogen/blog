@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import redis.clients.jedis.Jedis;
@@ -421,6 +422,7 @@ public class RedisCache{
     /**
      * 更改博客访问量
      */
+    @Scheduled(cron="0 0/10 * * * ?")
     public void updateBlogNum(){
         Jedis jedis = jedisPool.getResource();
         try {
@@ -429,7 +431,7 @@ public class RedisCache{
             HashMap<String, Object> map;
             for(Tuple tuple: blogSet){
                 map = new HashMap<>();
-                map.put("blogId", tuple.getElement());
+                map.put("blogId", Integer.valueOf(tuple.getElement()));
                 map.put("browse", (int)tuple.getScore());
                 list.add(map);
             }

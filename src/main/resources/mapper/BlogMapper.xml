@@ -59,7 +59,7 @@
 
 	<update id="updateBlogNum" parameterType="java.util.List">
 		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
-			UPDATE k_blog 
+			UPDATE k_blog
 			<set>
 			  browse = #{item.browse}
 			</set>

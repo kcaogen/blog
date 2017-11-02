@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import com.caogen.blog.service.BlogService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,15 +14,14 @@ import com.caogen.blog.dao.BlogDao;
 import com.caogen.blog.entity.Blog;
 import com.caogen.blog.entity.BlogTag;
 import com.caogen.blog.entity.BlogType;
-import com.caogen.blog.service.BlogService;
 
 @Service
 @Transactional
 public class BlogServiceImpl implements BlogService {
-	
+
 	@Resource
 	private BlogDao blogDao;
-	
+
 
 	/**
 	 * 获取所有博客信息
@@ -60,7 +60,7 @@ public class BlogServiceImpl implements BlogService {
 	public int insertBlog(Blog blog, String blogTag) {
 		blog.setTime(new java.sql.Timestamp(System.currentTimeMillis()).toString());
 		blogDao.insertBlog(blog);
-		
+
 		String[] tags = blogTag.split(",");
 		List<HashMap<String, Integer>> tagList = new ArrayList<>();
 		HashMap<String, Integer> map;
@@ -70,9 +70,9 @@ public class BlogServiceImpl implements BlogService {
 			map.put("tagId", Integer.parseInt(tags[i]));
 			tagList.add(map);
 		}
-		
+
 		blogDao.insertBlogTag(tagList);
-		
+
 		return blog.getBlogId();
 	}
 
