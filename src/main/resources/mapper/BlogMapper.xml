@@ -9,11 +9,11 @@
 	</select>
 
 	<select id="getAllBlogType" resultType="com.caogen.blog.entity.BlogType">
-		SELECT * FROM k_blogType
+		SELECT * FROM k_blogtype
 	</select>
 
 	<select id="getAllBlogTag" resultType="com.caogen.blog.entity.BlogTag">
-		SELECT * FROM k_blogTag
+		SELECT * FROM k_blogtag
 	</select>
 
 	<insert id="insertBlog" useGeneratedKeys="true" keyProperty="blogId"
@@ -40,7 +40,7 @@
 	</select>
 	
 	<select id="getTagListById" resultType="String" parameterType="int">
-		SELECT tagName FROM k_blogTag kb
+		SELECT tagName FROM k_blogtag kb
 		INNER JOIN k_blog_tag kbt ON kb.tagId = kbt.tagId
 		WHERE blogId = #{blogId}
 	</select>
