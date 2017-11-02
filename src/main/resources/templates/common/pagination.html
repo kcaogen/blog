@@ -1,0 +1,48 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta content="text/html;charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>pagination</title>
+</head>
+<body>
+<nav style="width: auto;display: table;margin-left: auto;margin-right: auto;" th:fragment="pagination">
+    <ul class="pagination pagination-lg">
+        <li id="paginationPrevious">
+            <a href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+                <span class="sr-only">Previous</span>
+            </a>
+        </li>
+    </ul>
+    <ul id="paginationPage" class="pagination pagination-lg">
+        <!--<li class="active"><a href="javascript:void(0);">1</a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">4</a></li>
+        <li><a href="#">5</a></li>-->
+    </ul>
+    <ul class="pagination pagination-lg">
+        <li id="paginationNext">
+            <a href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+                <span class="sr-only">Next</span>
+            </a>
+        </li>
+    </ul>
+    <ul class="pagination pagination-lg">
+        <p id="paginationTotalCount" class="navbar-text"></p>
+    </ul>
+    <script src="/js/common/pagination.js" ></script>
+    <script type="text/javascript" th:inline="javascript">
+        $(function(){
+            //使用EL表达式传入参数
+            pagination.init({
+                pageNum : [[${page.pageNum}]],
+                totalPages : [[${page.totalPages}]],
+                totalCount : [[${page.totalCount}]]
+            });
+        });
+    </script>
+</nav>
+</body>
+</html>

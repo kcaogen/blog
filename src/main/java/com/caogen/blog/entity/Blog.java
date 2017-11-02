@@ -1,5 +1,7 @@
 package com.caogen.blog.entity;
 
+import java.util.Date;
+
 @SuppressWarnings("serial")
 public class Blog implements java.io.Serializable {
 	
@@ -13,7 +15,7 @@ public class Blog implements java.io.Serializable {
 	
 	private String content;				//博客内容
 	
-	private String time;				//发布时间
+	private Date time;				//发布时间
 	
 	private int browse;					//浏览数量
 	
@@ -63,11 +65,11 @@ public class Blog implements java.io.Serializable {
 		this.content = content;
 	}
 
-	public String getTime() {
+	public Date getTime() {
 		return time;
 	}
 
-	public void setTime(String time) {
+	public void setTime(Date time) {
 		this.time = time;
 	}
 

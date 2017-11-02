@@ -28,7 +28,7 @@
             </button>
             <a class="navbar-brand" href="javascript:void(0);" th:if="${session.SPRING_SECURITY_CONTEXT}" th:text="${session.SPRING_SECURITY_CONTEXT.authentication.principal.username}">admin</a>
         </div>
-        <div id="navbar" class="navbar-collapse collapse">
+        <!--<div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#">Dashboard</a></li>
                 <li><a href="#">Settings</a></li>
@@ -38,7 +38,7 @@
             <form class="navbar-form navbar-right">
                 <input type="text" class="form-control" placeholder="Search...">
             </form>
-        </div>
+        </div>-->
     </div>
 </nav>
 
@@ -46,22 +46,10 @@
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
-                <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
-                <li><a href="#">Reports</a></li>
-                <li><a href="#">Analytics</a></li>
-                <li><a href="#">Export</a></li>
-            </ul>
-            <ul class="nav nav-sidebar">
-                <li><a href="">Nav item</a></li>
-                <li><a href="">Nav item again</a></li>
-                <li><a href="">One more nav</a></li>
-                <li><a href="">Another nav item</a></li>
-                <li><a href="">More navigation</a></li>
-            </ul>
-            <ul class="nav nav-sidebar">
-                <li><a href="">Nav item again</a></li>
-                <li><a href="">One more nav</a></li>
-                <li><a href="">Another nav item</a></li>
+                <li id="index"><a href="/admin">首页</a></li>
+                <li id="blogList"><a href="/admin/blogList">博客列表</a></li>
+                <li id="blogType"><a href="javascript:void(0);">博客类型</a></li>
+                <li id="blogTag"><a href="javascript:void(0);">博客标签</a></li>
             </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" layout:fragment="adminContent"></div>
@@ -69,4 +57,10 @@
 </div>
 </body>
 <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="/js/common/adminLayout.js"></script>
+<script th:inline="javascript">
+    $(function () {
+        adminLayout.init();
+    })
+</script>
 </html>

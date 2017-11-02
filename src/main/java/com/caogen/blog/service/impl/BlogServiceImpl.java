@@ -58,7 +58,6 @@ public class BlogServiceImpl implements BlogService {
 	 */
 	@Override
 	public int insertBlog(Blog blog, String blogTag) {
-		blog.setTime(new java.sql.Timestamp(System.currentTimeMillis()).toString());
 		blogDao.insertBlog(blog);
 
 		String[] tags = blogTag.split(",");

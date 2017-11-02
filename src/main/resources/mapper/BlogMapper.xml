@@ -19,11 +19,11 @@
 	<insert id="insertBlog" useGeneratedKeys="true" keyProperty="blogId"
 		parameterType="com.caogen.blog.entity.Blog">
 		INSERT INTO k_blog
-		(blogName, introduction, content,time,
+		(blogName, introduction, content,
 		blogType, browse, praise, reprintedUrl)
 		VALUES
 		(#{blogName}, #{introduction},
-		#{content}, #{time}, #{blogType}, #{browse}, #{praise}, #{reprintedUrl})
+		#{content}, #{blogType}, #{browse}, #{praise}, #{reprintedUrl})
 	</insert>
 
 	<insert id="insertBlogTag" parameterType="java.util.List">
