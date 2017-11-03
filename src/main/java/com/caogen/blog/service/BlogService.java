@@ -26,14 +26,6 @@ public interface BlogService {
 	 * @return
 	 */
 	List<BlogTag> getAllBlogTag();
-	
-	/**
-	 * 插入博客
-	 * @param blog
-	 * @param blogTag
-	 * @return
-	 */
-	int insertBlog(Blog blog, String blogTag);
 
 	/**
 	 * 通过blogId获取博客信息

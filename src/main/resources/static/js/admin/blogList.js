@@ -3,11 +3,15 @@ var blogList = {
     init : function (params) {
         blogList.click();
         blogList.searchValue(params);
+        blogList.addBlog();
     },
 
     URL : {
         blogList : function() {
             return '/admin/blogList';
+        },
+        addBlog : function () {
+            return '/admin/addBlog';
         }
     },
 
@@ -42,6 +46,12 @@ var blogList = {
      */
     searchValue : function (params) {
         $("#blogCondition").val(params['blogCondition']);
+    },
+
+    addBlog : function () {
+        $("#addBlog").click(function(){
+            window.location.href = blogList.URL.addBlog();
+        });
     }
 
 }

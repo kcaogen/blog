@@ -30,20 +30,6 @@ public interface BlogDao {
 	List<BlogTag> getAllBlogTag();
 	
 	/**
-	 * 插入博客
-	 * @param blog
-	 * @param blog
-	 * @return
-	 */
-	int insertBlog(Blog blog);
-	
-	/**
-	 * 插入博客标签
-	 * @param tagList
-	 */
-	void insertBlogTag(List<HashMap<String, Integer>> tagList);
-	
-	/**
 	 * 通过blogId获取博客信息
 	 * @param blogId
 	 * @return

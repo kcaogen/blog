@@ -22,4 +22,23 @@
         ORDER BY blogId DESC LIMIT #{offset}, #{pageSize}
     </select>
 
+    <insert id="insertBlog" useGeneratedKeys="true" keyProperty="blogId"
+            parameterType="com.caogen.blog.entity.Blog">
+        INSERT INTO k_blog
+        (blogName, introduction, content,
+        blogType, browse, praise, reprintedUrl)
+        VALUES
+        (#{blogName}, #{introduction},
+        #{content}, #{blogType}, #{browse}, #{praise}, #{reprintedUrl})
+    </insert>
+
+    <insert id="insertBlogTag" parameterType="java.util.List">
+        INSERT INTO k_blog_tag(blogId, tagId)
+        VALUES
+        <foreach collection="list" item="item" index="index"
+                 separator=",">
+            (#{item.blogId}, #{item.tagId} )
+        </foreach>
+    </insert>
+
 </mapper>

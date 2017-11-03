@@ -1,0 +1,88 @@
+
+*, *:before, *:after {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+#layout {
+	text-align: left;
+}
+#layout > header, .btns {
+	padding: 15px 0;
+	width: 90%;
+	margin: 0 auto;
+}
+.btns {
+	padding-top: 0;
+}
+.btns button {
+	padding: 2px 8px;
+}
+#layout > header > h1 {
+	font-size: 20px;
+	margin-bottom: 10px;
+}
+.btns button, .btn {
+	padding: 8px 10px;
+	background: #fff;
+	border: 1px solid #ddd;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	cursor: pointer;
+	-webkit-transition: background 300ms ease-out;
+	transition: background 300ms ease-out;
+}
+.btns button:hover, .btn:hover {
+	background: #f6f6f6;
+}
+header {
+	width: 1698px;
+	margin: 0pc auto;
+	height: 90px;
+	line-height: 90px;
+	position: relative;
+}
+header input {
+	background: #f3e7e7;
+	color: #666666;
+	height: 80px;
+	line-height: 80px;
+	font-size: 40px;
+	font-family: "microsoft yahei";
+	width: 90%;
+	padding-left: 5px;
+	border: 0px;
+}
+.btn-publish {
+	position: absolute;
+	height: 60px;
+	font-size: 19px;
+	line-height: 2.33;
+	color: #fff;
+	background-color: #be1a21;
+	border-color: #a8171d;
+	display: inline-block;
+	text-align: center;
+	vertical-align: middle;
+	cursor: pointer;
+	background-image: none;
+	border: 0;
+	padding: 8px;
+	top: 22px;
+	width: 120px;
+}
+
+#bg{ display: none; position: absolute; top: 0%; left: 0%; width: 100%; height: 100%; background-color: black; z-index:1001; -moz-opacity: 0.7; opacity:.70; filter: alpha(opacity=70);}
+#show{display: none; position: absolute; top: 25%; left: 22%; width: 50%; height: 60%; padding: 8px; border: 8px solid #E8E9F7; background-color: white; z-index:1002; overflow: auto;}
+
+.tagList {
+    padding: 2px 20px;
+    background: #ccc;
+    border-radius: 19px;
+    color: #fff;
+    text-align: center;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    display: inline-block;
+    cursor:pointer;
+}

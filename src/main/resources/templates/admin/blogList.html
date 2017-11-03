@@ -19,30 +19,37 @@
 <body>
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" layout:fragment="adminContent">
     <h2 class="sub-header">博客列表</h2>
-    <div class="input-group" style="width: 250px;">
+    <div class="input-group" style="width: 300px;">
         <input type="text" class="form-control" id="blogCondition" placeholder="名称">
         <span class="input-group-btn">
-                    <button class="btn btn-default" type="button" id="blogSearch">Search</button>
-                </span>
-    </div><br>
+            <button class="btn btn-default" type="button" id="blogSearch">Search</button>
+            <button class="btn btn-warning" id="addBlog">新增</button>
+        </span>
+    </div>
+    <br>
     <div class="table-responsive">
         <table class="table table-striped">
             <thead>
             <tr>
-                <th>ID</th>
+                <th>序号</th>
                 <th>名称</th>
                 <th>类型</th>
                 <th>访问量</th>
                 <th>时间</th>
+                <th>操作</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="blog : ${page.result}">
-                <td th:text="${blog.blogId}">1</td>
+            <tr th:each="blog, blogStat : ${page.result}">
+                <td th:text="${blogStat.count + (page.pageNum-1)*page.pageSize}">1</td>
                 <td th:text="${blog.blogName}">Java历史</td>
                 <td th:text="${blog.blogType}">Java</td>
                 <td th:text="${blog.browse}">1000</td>
                 <td th:text="${#dates.format(blog.time, 'yyyy-MM-dd HH:mm:ss')}">2017-08-04</td>
+                <td th:attr="blogId=${blog.blogId}">
+                    <button class="btn-primary">修改</button>
+                    <button class="btn-danger">删除</button>
+                </td>
             </tr>
             </tbody>
         </table>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>新增博客</title>
+    <link rel="stylesheet" href="/editormd/css/editormd.css" />
+    <link rel="stylesheet" href="/css/admin/blog.css" />
+    <script src="/js/jquery-2.0.3.min.js"></script>
+    <script src="/editormd/editormd.js"></script>
+    <script src="/layer/layer.js"></script>
+    <script src="/js/admin/addBlog.js"></script>
+    <script th:inline="javascript">
+        $(function(){
+            addBlog.init();
+        });
+    </script>
+</head>
+<body>
+<form id="addBlog">
+    <div id="bg"></div>
+    <div id="show">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+        <textarea rows="" cols="" id="introduction" name="introduction" style="margin: 0px;height: 30%;width: 99%;" placeholder="博客介绍"></textarea>
+        <br/><br/>
+        <select id="blogType" name="blogType" style="height: 10%;width: 99%;">
+            <option value="0">请选择文章类型</option>
+            <option th:each="blog : ${blogTypeList}" th:value="${blog.typeName}" th:text="${blog.typeName}"></option>
+        </select>
+        <br/><br/>
+        <div id="tagList" style="padding: 5px 10px;border: 1px solid #e0e0e0;height: 20%;width: 99%;"></div>
+        <div style="margin-top:5px;">
+            <span class="tagList show" th:each="blog : ${blogTagList}" th:value="${blog.tagId}" th:text="${blog.tagName}"></span>
+        </div>
+        <input value="" name="reprintedUrl" style="height: 10%;width: 99%;" placeholder="转载Url">
+        <input id="blogTag" name="blogTag" type="hidden">
+        <div style="float: right;">
+            <button type="button" id="hideDiv">取消</button>
+            <button type="button" id="addBlogButton">发布</button>
+        </div>
+    </div>
+    <div id="layout">
+        <header>
+            <input type="text" maxlength="100" id="blogName" name="blogName" class="col-sm-4 form-control input-file-title hide" placeholder="文章标题"/>
+            <a class="btn-publish" id="showDiv">发表博客</a>
+        </header>
+        <div class="editormd" id="test-editormd">
+
+		<textarea class="editormd-markdown-textarea" name="test-editormd-markdown-doc">
+					#### Disabled options
+
+- TeX (Based on KaTeX);
+- Emoji;
+- Task lists;
+- HTML tags decode;
+- Flowchart and Sequence Diagram;
+
+#### Editor.md directory
+
+    editor.md/
+            lib/
+            css/
+            scss/
+            tests/
+            fonts/
+            images/
+            plugins/
+            examples/
+            languages/
+            editormd.js
+            ...
+
+```html
+&lt;!-- English --&gt;
+&lt;script src="../dist/js/languages/en.js"&gt;&lt;/script&gt;
+
+&lt;!-- 繁體中文 --&gt;
+&lt;script src="../dist/js/languages/zh-tw.js"&gt;&lt;/script&gt;
+```
+		</textarea>
+            <textarea style="display:none;" name="content"></textarea>
+            <!-- 第二个隐藏文本域，用来构造生成的HTML代码，方便表单POST提交，这里的name可以任意取，后台接受时以这个name键为准 -->
+        </div>
+    </div>
+</form>
+</body>
+</html>
