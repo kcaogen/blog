@@ -14,6 +14,9 @@ var addBlog = {
         },
         blog : function () {
             return '/blog/info/';
+        },
+        upload : function () {
+            return '/upload?_csrf='+$("#token").val();
         }
     },
 
@@ -29,7 +32,7 @@ var addBlog = {
             codeFold : true,
             imageUpload : true,
             imageFormats : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
-            imageUploadURL : "/uploadfile.do",
+            imageUploadURL : addBlog.URL.upload(),
             htmlDecode : "style,script,iframe|on*",            // 开启 HTML 标签解析，为了安全性，默认不开启
             tocm : true,         		  // Using [TOCM]
             taskList : true,

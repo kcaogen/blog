@@ -2,6 +2,9 @@ server:
   port: 8080
   context-path: /
 
+web:
+  upload-path : /home/caogen/project/blog
+
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
@@ -14,7 +17,7 @@ spring:
   mvc:
     static-path-pattern: /**
   resources:
-    static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/,file:/home/caogen/project/blog
+    static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/,file:${web.upload-path}
 
 mybatis:
   config-location: classpath:mybatis-config.xml
