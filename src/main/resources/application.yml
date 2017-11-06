@@ -3,7 +3,7 @@ server:
   context-path: /
 
 web:
-  upload-path : /home/caogen/project/blog/blogImg
+  upload-path : /home/caogen/project/blog/blogImg/
   load-path : /home/caogen/project/blog
   blogImg-path : /blogImg/
 
@@ -40,6 +40,12 @@ jedis :
       maxTotal: 100
       maxIdle: 10
       maxWaitMillis : 100000
+
+qiniuyun :
+  AK : 8X3xhJJ0f68vsOgKYFDDEQcM8SrZtYAnxAjkhx_T
+  SK : 49QhcLK_ur1yqOOrJlir1vitcTkG6eghScSR1EnA
+  bucket : blog
+  url : https://cdn.kcaogen.com/
 
 security:
   user:

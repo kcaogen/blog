@@ -73,6 +73,12 @@
 		</dependency>
 
 		<dependency>
+			<groupId>com.qiniu</groupId>
+			<artifactId>qiniu-java-sdk</artifactId>
+			<version>7.2.6</version>
+		</dependency>
+
+		<dependency>
 			<groupId>org.apache.tomcat.embed</groupId>
 			<artifactId>tomcat-embed-logging-juli</artifactId>
 			<version>${tomcat.version}</version>
