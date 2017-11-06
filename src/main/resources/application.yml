@@ -1,3 +1,5 @@
+ip : 127.0.0.1
+
 server:
   port: 8080
   context-path: /
@@ -10,7 +12,7 @@ web:
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/caogenBlog?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&useSSL=false
+    url: jdbc:mysql://${ip}:3306/caogenBlog?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&useSSL=false
     username: root
     password: caogen
   thymeleaf:
@@ -32,7 +34,7 @@ mybatis:
 
 jedis :
   pool :
-    host : 127.0.0.1
+    host : ${ip}
     port : 6379
     password : caogen
     timeout : 60000
