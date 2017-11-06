@@ -21,15 +21,15 @@ public class UploadController {
     @Value("${web.upload-path}")
     private String path;
 
+    @Value("${web.blogImg-path}")
+    private String blogImgPath;
+
     @PostMapping(value = "/upload", produces = { "application/json;charset=UTF-8" })
     @ResponseBody
     public HashMap<String,Object> uploadfile(@RequestParam(value = "editormd-image-file", required = false) MultipartFile attach,
                                  HttpServletResponse response){
         HashMap <String,Object> map = new HashMap <>();
         try {
-
-            String blogImgPath = "/blogImg/";
-            path = path + blogImgPath;
 
             /**
              * 文件路径不存在则需要创建文件路径
@@ -40,7 +40,9 @@ public class UploadController {
             }
 
             //最终文件名
-            String fileName = System.currentTimeMillis()+"_"+attach.getOriginalFilename();
+            String originalFilename = attach.getOriginalFilename();
+            String fileNameSuffix = originalFilename.substring(originalFilename.lastIndexOf("."));
+            String fileName = "kcaogen_" + System.currentTimeMillis() + fileNameSuffix.toLowerCase();
             File realFile=new File(path+File.separator+fileName);
             FileUtils.copyInputStreamToFile(attach.getInputStream(), realFile);
 
