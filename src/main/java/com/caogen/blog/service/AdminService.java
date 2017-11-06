@@ -15,4 +15,10 @@ public interface AdminService {
      */
     int insertBlog(Blog blog, String blogTag);
 
+    /**
+     * 删除博客
+     * @param blogId
+     */
+    void delBlog(long blogId);
+
 }

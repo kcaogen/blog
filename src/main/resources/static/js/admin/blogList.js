@@ -4,14 +4,18 @@ var blogList = {
         blogList.click();
         blogList.searchValue(params);
         blogList.addBlog();
+        blogList.delBlogClick(params);
     },
 
     URL : {
         blogList : function() {
-            return '/admin/blogList';
+            return '/admin/blog';
         },
         addBlog : function () {
-            return '/admin/addBlog';
+            return '/admin/blog/add';
+        },
+        delBlog : function () {
+            return '/admin/delBlog';
         }
     },
 
@@ -52,6 +56,37 @@ var blogList = {
         $("#addBlog").click(function(){
             window.location.href = blogList.URL.addBlog();
         });
+    },
+
+    delBlogClick : function (params) {
+        $(".delBlog").click(function(){
+            params.blogId = $(this).parent().attr("blogId");
+            params.blogType = $(this).parent().attr("blogType");
+            layer.prompt({title: '输入口令，并确认', formType: 1}, function(val, index){
+                if(val == "caogen"){
+                    layer.close(index);
+                    blogList.delBlog(params);
+                }
+            });
+        });
+    },
+
+    delBlog : function (params) {
+        var headers = {};
+        headers['X-CSRF-TOKEN'] = params.token;
+        $.ajax({
+            type: "POST",
+            url: blogList.URL.delBlog(),
+            headers: headers,
+            data: {"blogId": params.blogId, "blogType": params.blogType},
+            success:function (data) {
+                if (data.result == true) {
+                    layer.msg("success", function(){
+                        window.location.href=blogList.URL.blogList();
+                    });
+                }
+            }
+        })
     }
 
 }

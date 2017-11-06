@@ -8,9 +8,11 @@
     <title>博客列表</title>
     <script src="/js/admin/blogList.js" ></script>
     <script th:inline="javascript">
+        var token = [[${_csrf.token}]];
         $(function(){
             blogList.init({
-                blogCondition : [[${blogCondition}]]
+                blogCondition : [[${blogCondition}]],
+                token : token    //Spring Security POST方式下的CSRF验证
             });
         });
     </script>
@@ -46,9 +48,9 @@
                 <td th:text="${blog.blogType}">Java</td>
                 <td th:text="${blog.browse}">1000</td>
                 <td th:text="${#dates.format(blog.time, 'yyyy-MM-dd HH:mm:ss')}">2017-08-04</td>
-                <td th:attr="blogId=${blog.blogId}">
+                <td th:attr="blogId=${blog.blogId},blogType=${blog.blogType}">
                     <button class="btn-primary">修改</button>
-                    <button class="btn-danger">删除</button>
+                    <button class="btn-danger delBlog">删除</button>
                 </td>
             </tr>
             </tbody>

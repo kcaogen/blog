@@ -41,4 +41,12 @@
         </foreach>
     </insert>
 
+    <delete id="delBlog">
+        DELETE FROM  k_blog WHERE blogId = #{blogId}
+    </delete>
+
+    <delete id="delBlogTag">
+        DELETE FROM  k_blog_tag WHERE blogId = #{blogId}
+    </delete>
+
 </mapper>

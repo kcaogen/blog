@@ -11,7 +11,7 @@ var adminLayout  = {
             return;
         }
 
-        if (path.indexOf("blogList") != -1) {
+        if (path.indexOf("blog") != -1) {
             $("#blogList").addClass("active");
             return;
         }

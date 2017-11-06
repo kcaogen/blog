@@ -55,4 +55,13 @@ public class AdminServiceImpl implements AdminService {
         return blog.getBlogId();
     }
 
+    /**
+     * 删除博客
+     * @param blogId
+     */
+    public void delBlog(long blogId) {
+        adminBlogDao.delBlog(blogId);
+        adminBlogDao.delBlogTag(blogId);
+    }
+
 }

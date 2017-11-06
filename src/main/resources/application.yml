@@ -20,6 +20,10 @@ spring:
     static-path-pattern: /**
   resources:
     static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/,file:${web.load-path}
+  http:
+    multipart:
+      max-file-size: 5MB
+      max-request-size: 100MB
 
 mybatis:
   config-location: classpath:mybatis-config.xml

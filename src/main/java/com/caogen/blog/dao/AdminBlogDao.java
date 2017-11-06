@@ -27,4 +27,16 @@ public interface AdminBlogDao {
      * @param tagList
      */
     void insertBlogTag(List<HashMap<String, Integer>> tagList);
+
+    /**
+     * 删除博客
+     * @param blogId
+     */
+    void delBlog(@Param("blogId") long blogId);
+
+    /**
+     * 删除博客标签
+     * @param blogId
+     */
+    void delBlogTag(@Param("blogId") long blogId);
 }

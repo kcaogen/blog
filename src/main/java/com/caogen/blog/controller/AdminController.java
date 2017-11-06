@@ -33,7 +33,7 @@ public class AdminController {
         return "admin/index";
     }
 
-    @GetMapping(value = "/blogList")
+    @GetMapping(value = "/blog")
     public String goBlogList(@RequestParam(value="pageNum",defaultValue="1",required=false)int pageNum,
                              @RequestParam(value="blogCondition",defaultValue="",required=false)String blogCondition,
                              Model model) {
@@ -49,7 +49,7 @@ public class AdminController {
        }
     }
 
-    @GetMapping(value = "/addBlog")
+    @GetMapping(value = "/blog/add")
     public String goAddBlog(Model model) {
         try {
             List<BlogType> blogTypeList = redisCache.getBlogType();
@@ -76,6 +76,24 @@ public class AdminController {
         }catch (Exception e) {
             result = new BlogResult(false, e.getMessage());
             logger.error("goAddBlog: " + e);
+            e.printStackTrace();
+        }finally {
+            return result;
+        }
+    }
+
+    @PostMapping(value = "/delBlog", produces = { "application/json;charset=UTF-8" })
+    @ResponseBody
+    public BlogResult delBlog(@RequestParam(value="blogId")long blogId,
+                              @RequestParam(value="blogType")String blogType) {
+        BlogResult result = null;
+        try {
+            adminService.delBlog(blogId);
+            redisCache.delCacheByAddBlog(blogType);
+            result = new BlogResult(true, blogId);
+        }catch (Exception e) {
+            result = new BlogResult(false, e.getMessage());
+            logger.error("delBlog: " + e);
             e.printStackTrace();
         }finally {
             return result;
