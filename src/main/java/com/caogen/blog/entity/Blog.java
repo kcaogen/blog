@@ -15,7 +15,7 @@ public class Blog implements java.io.Serializable {
 	
 	private String content;				//博客内容
 	
-	private Date time;				//发布时间
+	private Date time;					//发布时间
 	
 	private int browse;					//浏览数量
 	

@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.List;
 
 @Controller
@@ -94,6 +95,41 @@ public class AdminController {
         }catch (Exception e) {
             result = new BlogResult(false, e.getMessage());
             logger.error("delBlog: " + e);
+            e.printStackTrace();
+        }finally {
+            return result;
+        }
+    }
+
+    @GetMapping(value = "/blog/update/{blogId}")
+    public String goUpdateBlog(Model model, @PathVariable("blogId") long blogId) {
+        try {
+            List<BlogType> blogTypeList = redisCache.getBlogType();
+            List<BlogTag> blogTagList = redisCache.getBlogTag();
+            HashMap<String, Object> blogInfo = adminService.getBlog(blogId);
+
+            model.addAttribute("blogTypeList", blogTypeList);
+            model.addAttribute("blogTagList", blogTagList);
+            model.addAttribute("info", blogInfo);
+        }catch (Exception e) {
+            logger.error("goUpdateBlog: " + e);
+            e.printStackTrace();
+        }finally {
+            return "admin/updateBlog";
+        }
+    }
+
+    @PostMapping(value = "/updateBlog", produces = { "application/json;charset=UTF-8" })
+    @ResponseBody
+    public BlogResult updateBlog(Blog blog, String blogTag) {
+        BlogResult result = null;
+        try {
+            adminService.updateBlog(blog, blogTag);
+            redisCache.delCacheByUpdateBlog(blog.getBlogType(), String.valueOf(blog.getBlogId()));
+            result = new BlogResult(true, blog.getBlogId());
+        }catch (Exception e) {
+            result = new BlogResult(false, e.getMessage());
+            logger.error("updateBlog: " + e);
             e.printStackTrace();
         }finally {
             return result;

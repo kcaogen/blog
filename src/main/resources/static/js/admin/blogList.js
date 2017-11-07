@@ -5,6 +5,7 @@ var blogList = {
         blogList.searchValue(params);
         blogList.addBlog();
         blogList.delBlogClick(params);
+        blogList.updateBlog();
     },
 
     URL : {
@@ -16,6 +17,9 @@ var blogList = {
         },
         delBlog : function () {
             return '/admin/delBlog';
+        },
+        updateBlog : function () {
+            return '/admin/blog/update';
         }
     },
 
@@ -87,6 +91,13 @@ var blogList = {
                 }
             }
         })
+    },
+
+    updateBlog : function () {
+        $(".updateBlog").click(function(){
+            var blogId = $(this).parent().attr("blogId");
+            window.location.href = blogList.URL.updateBlog() + "/" + blogId;
+        });
     }
 
 }

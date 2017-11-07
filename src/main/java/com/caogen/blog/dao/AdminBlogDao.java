@@ -1,6 +1,7 @@
 package com.caogen.blog.dao;
 
 import com.caogen.blog.entity.Blog;
+import com.caogen.blog.entity.BlogTag;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -39,4 +40,24 @@ public interface AdminBlogDao {
      * @param blogId
      */
     void delBlogTag(@Param("blogId") long blogId);
+
+    /**
+     * 获取博客信息
+     * @param blogId
+     * @return
+     */
+    Blog getBlogById(@Param("blogId") long blogId);
+
+    /**
+     * 获取博客标签
+     * @param blogId
+     * @return
+     */
+    List<BlogTag> getBlogTagById(@Param("blogId") long blogId);
+
+    /**
+     * 修改博客
+     * @param blog
+     */
+    void updateBlog(Blog blog);
 }

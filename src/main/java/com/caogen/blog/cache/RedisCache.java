@@ -420,6 +420,25 @@ public class RedisCache{
     }
 
     /**
+     * 修改博客之后有些缓存需要清除以便重新生成
+     */
+    public void delCacheByUpdateBlog(String blogType, String blogId) {
+        Jedis jedis = jedisPool.getResource();
+        try {
+            jedis.del(blogType);
+            jedis.del(RedisKeyEnum.BLOGIDLIST.toString());
+            jedis.del(RedisKeyEnum.BLOGLISTBYNEW.toString());
+            jedis.hdel(RedisKeyEnum.BLOGINFO.toString(), blogId);
+            jedis.hdel(RedisKeyEnum.BLOGTAGGROUP.toString(), blogId);
+        }catch (Exception e) {
+            logger.error("delCacheByAddBlog:" + e);
+            e.printStackTrace();
+        }finally {
+            jedisClose(jedis);
+        }
+    }
+
+    /**
      * 更改博客访问量
      */
     @Scheduled(cron="0 0/10 * * * ?")

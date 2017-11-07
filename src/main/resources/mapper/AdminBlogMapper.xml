@@ -49,4 +49,20 @@
         DELETE FROM  k_blog_tag WHERE blogId = #{blogId}
     </delete>
 
+    <select id="getBlogById" resultType="Blog">
+        SELECT * FROM k_blog WHERE blogId = #{blogId}
+    </select>
+
+    <select id="getBlogTagById" resultType="BlogTag">
+        SELECT kbt.tagId, kb.tagName  FROM k_blog_tag kbt
+        INNER JOIN k_blogtag kb ON kbt.tagId = kb.tagId
+        WHERE kbt.blogId = #{blogId}
+    </select>
+
+    <update id="updateBlog">
+        UPDATE k_blog SET blogName = #{blogName}, introduction = #{introduction},
+        content = #{content}, blogType = #{blogType} , reprintedUrl = #{reprintedUrl}
+        WHERE blogId = #{blogId}
+    </update>
+
 </mapper>

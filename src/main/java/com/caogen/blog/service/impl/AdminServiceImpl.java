@@ -3,6 +3,7 @@ package com.caogen.blog.service.impl;
 import com.caogen.blog.dao.AdminBlogDao;
 import com.caogen.blog.dto.Page;
 import com.caogen.blog.entity.Blog;
+import com.caogen.blog.entity.BlogTag;
 import com.caogen.blog.enums.PageEnum;
 import com.caogen.blog.service.AdminService;
 import org.springframework.stereotype.Service;
@@ -62,6 +63,44 @@ public class AdminServiceImpl implements AdminService {
     public void delBlog(long blogId) {
         adminBlogDao.delBlog(blogId);
         adminBlogDao.delBlogTag(blogId);
+    }
+
+    /**
+     * 获取博客信息
+     * @param blogId
+     * @return
+     */
+    public HashMap<String, Object> getBlog(long blogId) {
+        HashMap<String, Object> map = new HashMap<>();
+        Blog blog = adminBlogDao.getBlogById(blogId);
+        List<BlogTag> tagList = adminBlogDao.getBlogTagById(blogId);
+        map.put("blog", blog);
+        map.put("tagList", tagList);
+        return map;
+    }
+
+    /**
+     * 修改博客
+     * @param blog
+     * @param blogTag
+     * @return
+     */
+    @Override
+    public void updateBlog(Blog blog, String blogTag) {
+        adminBlogDao.updateBlog(blog);
+        adminBlogDao.delBlogTag(blog.getBlogId());
+        String[] tags = blogTag.split(",");
+        List<HashMap<String, Integer>> tagList = new ArrayList<>();
+        HashMap<String, Integer> map;
+        for(int i = 0; i < tags.length; i++){
+            map = new HashMap<>();
+            map.put("blogId", blog.getBlogId());
+            map.put("tagId", Integer.parseInt(tags[i]));
+            tagList.add(map);
+        }
+
+        adminBlogDao.insertBlogTag(tagList);
+
     }
 
 }

@@ -49,7 +49,7 @@
                 <td th:text="${blog.browse}">1000</td>
                 <td th:text="${#dates.format(blog.time, 'yyyy-MM-dd HH:mm:ss')}">2017-08-04</td>
                 <td th:attr="blogId=${blog.blogId},blogType=${blog.blogType}">
-                    <button class="btn-primary">修改</button>
+                    <button class="btn-primary updateBlog">修改</button>
                     <button class="btn-danger delBlog">删除</button>
                 </td>
             </tr>

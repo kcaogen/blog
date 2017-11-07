@@ -1,0 +1,60 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>修改博客</title>
+    <link rel="stylesheet" href="/editormd/css/editormd.css" />
+    <link rel="stylesheet" href="/css/admin/blog.css" />
+    <script src="/js/jquery-2.0.3.min.js"></script>
+    <script src="/editormd/editormd.js"></script>
+    <script src="/layer/layer.js"></script>
+    <script src="/js/admin/updateBlog.js"></script>
+    <script th:inline="javascript">
+        $(function(){
+            updateBlog.init({
+                tagList : [[${info.tagList}]],
+                blogType : [[${info.blog.blogType}]]
+            });
+        });
+    </script>
+</head>
+<body>
+<form id="updateBlog">
+    <div id="bg"></div>
+    <div id="show">
+        <input type="hidden" id="token" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+        <input type="hidden" name = "blogId" th:value="${info.blog.blogId}">
+        <textarea rows="" cols="" id="introduction" name="introduction" style="margin: 0px;height: 30%;width: 99%;" placeholder="博客介绍" th:text="${info.blog.introduction}"></textarea>
+        <br/><br/>
+        <select id="blogType" name="blogType" style="height: 10%;width: 99%;">
+            <option value="0">请选择文章类型</option>
+            <option th:each="blog : ${blogTypeList}" th:value="${blog.typeName}" th:text="${blog.typeName}"></option>
+        </select>
+        <br/><br/>
+        <div id="tagList" style="padding: 5px 10px;border: 1px solid #e0e0e0;height: 20%;width: 99%;"></div>
+        <div style="margin-top:5px;">
+            <span class="tagList show" th:each="blog : ${blogTagList}" th:value="${blog.tagId}" th:text="${blog.tagName}"></span>
+        </div>
+        <input value="" name="reprintedUrl" style="height: 10%;width: 99%;" placeholder="转载Url" th:value="${info.blog.reprintedUrl}">
+        <input id="blogTag" name="blogTag" type="hidden">
+        <div style="float: right;">
+            <button type="button" id="hideDiv">取消</button>
+            <button type="button" id="updateBlogButton">修改</button>
+        </div>
+    </div>
+    <div id="layout">
+        <header>
+            <input type="text" maxlength="100" id="blogName" name="blogName" th:value="${info.blog.blogName}" class="col-sm-4 form-control input-file-title hide" placeholder="文章标题"/>
+            <a class="btn-publish" id="showDiv">修改博客</a>
+        </header>
+        <div class="editormd" id="test-editormd">
+
+		<textarea class="editormd-markdown-textarea" name="test-editormd-markdown-doc" th:text="${info.blog.content}"></textarea>
+            <textarea style="display:none;" name="content"></textarea>
+            <!-- 第二个隐藏文本域，用来构造生成的HTML代码，方便表单POST提交，这里的name可以任意取，后台接受时以这个name键为准 -->
+        </div>
+    </div>
+</form>
+</body>
+</html>
