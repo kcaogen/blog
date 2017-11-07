@@ -36,4 +36,12 @@ public interface AdminService {
      * @param blogTag
      */
     void updateBlog(Blog blog, String blogTag);
+
+    Page getBlogTypeList(int pageNum);
+
+    void addBlogType(String typeName);
+
+    Page getBlogTagList(int pageNum);
+
+    void addBlogTag(String tagName);
 }

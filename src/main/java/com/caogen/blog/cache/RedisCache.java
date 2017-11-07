@@ -431,7 +431,37 @@ public class RedisCache{
             jedis.hdel(RedisKeyEnum.BLOGINFO.toString(), blogId);
             jedis.hdel(RedisKeyEnum.BLOGTAGGROUP.toString(), blogId);
         }catch (Exception e) {
-            logger.error("delCacheByAddBlog:" + e);
+            logger.error("delCacheByUpdateBlog:" + e);
+            e.printStackTrace();
+        }finally {
+            jedisClose(jedis);
+        }
+    }
+
+    /**
+     * 新增博客类型之后有些缓存需要清除以便重新生成
+     */
+    public void delCacheByAddBlogType() {
+        Jedis jedis = jedisPool.getResource();
+        try {
+            jedis.del(RedisKeyEnum.BLOGTYPE.toString());
+        }catch (Exception e) {
+            logger.error("delCacheByAddBlogType:" + e);
+            e.printStackTrace();
+        }finally {
+            jedisClose(jedis);
+        }
+    }
+
+    /**
+     * 新增博客标签之后有些缓存需要清除以便重新生成
+     */
+    public void delCacheByAddBlogTag() {
+        Jedis jedis = jedisPool.getResource();
+        try {
+            jedis.del(RedisKeyEnum.BLOGTAG.toString());
+        }catch (Exception e) {
+            logger.error("delCacheByAddBlogTag:" + e);
             e.printStackTrace();
         }finally {
             jedisClose(jedis);

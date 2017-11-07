@@ -1,7 +1,7 @@
 package com.caogen.blog.enums;
 
 public enum PageEnum {
-    UserPageSize(10);
+    PageSize(10);
 
     private int pageSize;
 

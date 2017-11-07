@@ -2,6 +2,7 @@ package com.caogen.blog.dao;
 
 import com.caogen.blog.entity.Blog;
 import com.caogen.blog.entity.BlogTag;
+import com.caogen.blog.entity.BlogType;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -27,7 +28,7 @@ public interface AdminBlogDao {
      * 插入博客标签
      * @param tagList
      */
-    void insertBlogTag(List<HashMap<String, Integer>> tagList);
+    void insertBlogTagByBlogId(List<HashMap<String, Integer>> tagList);
 
     /**
      * 删除博客
@@ -60,4 +61,16 @@ public interface AdminBlogDao {
      * @param blog
      */
     void updateBlog(Blog blog);
+
+    long getBlogTypeCount();
+
+    List<BlogType> getBlogType(@Param("offset") int offset, @Param("pageSize") int pageSize);
+
+    void insertBlogType(@Param("typeName") String typeName);
+
+    long getBlogTagCount();
+
+    List<BlogTag> getBlogTag(@Param("offset") int offset, @Param("pageSize") int pageSize);
+
+    void insertBlogTag(@Param("tagName") String tagName);
 }

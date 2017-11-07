@@ -4,6 +4,7 @@ import com.caogen.blog.dao.AdminBlogDao;
 import com.caogen.blog.dto.Page;
 import com.caogen.blog.entity.Blog;
 import com.caogen.blog.entity.BlogTag;
+import com.caogen.blog.entity.BlogType;
 import com.caogen.blog.enums.PageEnum;
 import com.caogen.blog.service.AdminService;
 import org.springframework.stereotype.Service;
@@ -25,7 +26,7 @@ public class AdminServiceImpl implements AdminService {
     public Page getBlogList(int pageNum, String name) {
         name = name.trim();
         long count = adminBlogDao.getBlogCount(name);
-        Page page = new Page(PageEnum.UserPageSize.getPageSize(), count,pageNum);
+        Page page = new Page(PageEnum.PageSize.getPageSize(), count,pageNum);
         List<Blog> blogList = adminBlogDao.getBlog(page.getOffSet(), page.getPageSize(), name);
         page.setResult(blogList);
         return page;
@@ -51,7 +52,7 @@ public class AdminServiceImpl implements AdminService {
             tagList.add(map);
         }
 
-        adminBlogDao.insertBlogTag(tagList);
+        adminBlogDao.insertBlogTagByBlogId(tagList);
 
         return blog.getBlogId();
     }
@@ -60,6 +61,7 @@ public class AdminServiceImpl implements AdminService {
      * 删除博客
      * @param blogId
      */
+    @Override
     public void delBlog(long blogId) {
         adminBlogDao.delBlog(blogId);
         adminBlogDao.delBlogTag(blogId);
@@ -70,6 +72,7 @@ public class AdminServiceImpl implements AdminService {
      * @param blogId
      * @return
      */
+    @Override
     public HashMap<String, Object> getBlog(long blogId) {
         HashMap<String, Object> map = new HashMap<>();
         Blog blog = adminBlogDao.getBlogById(blogId);
@@ -99,8 +102,36 @@ public class AdminServiceImpl implements AdminService {
             tagList.add(map);
         }
 
-        adminBlogDao.insertBlogTag(tagList);
+        adminBlogDao.insertBlogTagByBlogId(tagList);
 
+    }
+
+    @Override
+    public Page getBlogTypeList(int pageNum) {
+        long count = adminBlogDao.getBlogTypeCount();
+        Page page = new Page(PageEnum.PageSize.getPageSize(), count,pageNum);
+        List<BlogType> blogTypeList = adminBlogDao.getBlogType(page.getOffSet(), page.getPageSize());
+        page.setResult(blogTypeList);
+        return page;
+    }
+
+    @Override
+    public void addBlogType(String typeName) {
+        adminBlogDao.insertBlogType(typeName);
+    }
+
+    @Override
+    public Page getBlogTagList(int pageNum) {
+        long count = adminBlogDao.getBlogTagCount();
+        Page page = new Page(PageEnum.PageSize.getPageSize(), count,pageNum);
+        List<BlogTag> blogTagList = adminBlogDao.getBlogTag(page.getOffSet(), page.getPageSize());
+        page.setResult(blogTagList);
+        return page;
+    }
+
+    @Override
+    public void addBlogTag(String tagName) {
+        adminBlogDao.insertBlogTag(tagName);
     }
 
 }

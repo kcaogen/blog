@@ -11,11 +11,6 @@ var adminLayout  = {
             return;
         }
 
-        if (path.indexOf("blog") != -1) {
-            $("#blogList").addClass("active");
-            return;
-        }
-
         if (path.indexOf("blogType") != -1) {
             $("#blogType").addClass("active");
             return;
@@ -23,6 +18,11 @@ var adminLayout  = {
 
         if (path.indexOf("blogTag") != -1) {
             $("#blogTag").addClass("active");
+            return;
+        }
+
+        if (path.indexOf("blog") != -1) {
+            $("#blogList").addClass("active");
             return;
         }
 

@@ -32,7 +32,7 @@
         #{content}, #{blogType}, #{browse}, #{praise}, #{reprintedUrl})
     </insert>
 
-    <insert id="insertBlogTag" parameterType="java.util.List">
+    <insert id="insertBlogTagByBlogId" parameterType="java.util.List">
         INSERT INTO k_blog_tag(blogId, tagId)
         VALUES
         <foreach collection="list" item="item" index="index"
@@ -64,5 +64,33 @@
         content = #{content}, blogType = #{blogType} , reprintedUrl = #{reprintedUrl}
         WHERE blogId = #{blogId}
     </update>
+
+    <select id="getBlogTypeCount" resultType="java.lang.Long">
+        SELECT COUNT(1) FROM k_blogtype
+    </select>
+
+    <!-- 小数据查询方式 -->
+    <select id="getBlogType" resultType="BlogType">
+        SELECT * FROM k_blogtype
+        ORDER BY typeId DESC LIMIT #{offset}, #{pageSize}
+    </select>
+
+    <insert id="insertBlogType">
+        INSERT INTO k_blogtype(typeName) VALUES (#{typeName})
+    </insert>
+
+    <select id="getBlogTagCount" resultType="java.lang.Long">
+        SELECT COUNT(1) FROM k_blogtag
+    </select>
+
+    <!-- 小数据查询方式 -->
+    <select id="getBlogTag" resultType="BlogTag">
+        SELECT * FROM k_blogtag
+        ORDER BY tagId DESC LIMIT #{offset}, #{pageSize}
+    </select>
+
+    <insert id="insertBlogTag">
+        INSERT INTO k_blogtag(tagName) VALUES (#{tagName})
+    </insert>
 
 </mapper>

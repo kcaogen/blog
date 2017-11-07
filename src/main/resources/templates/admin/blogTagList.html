@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" layout:decorator="common/adminLayout" xmlns:layout="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>博客标签列表</title>
+    <script src="/js/admin/blogTagList.js" ></script>
+    <script th:inline="javascript">
+        var token = [[${_csrf.token}]];
+        $(function(){
+            blogTagList.init({
+                token : token    //Spring Security POST方式下的CSRF验证
+            });
+        });
+    </script>
+</head>
+
+<body>
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" layout:fragment="adminContent">
+    <h2 class="sub-header">博客标签列表</h2>
+    <div class="input-group" style="width: 300px;">
+        <button class="btn btn-warning" id="addBlogTag">新增</button>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>序号</th>
+                <th>名称</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="blog, blogStat : ${page.result}">
+                <td th:text="${blogStat.count + (page.pageNum-1)*page.pageSize}">1</td>
+                <td th:text="${blog.tagName}">Java</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <nav th:replace="common/pagination :: pagination"></nav>
+</div>
+</body>
+</html>

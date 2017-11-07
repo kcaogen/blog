@@ -136,4 +136,66 @@ public class AdminController {
         }
     }
 
+    @GetMapping(value = "/blogType")
+    public String goBlogTypeList(@RequestParam(value="pageNum",defaultValue="1",required=false)int pageNum,
+                             Model model) {
+        try {
+            Page page = adminService.getBlogTypeList(pageNum);
+            model.addAttribute("page", page);
+        }catch (Exception e) {
+            logger.error("goBlogTypeList: " + e);
+            e.printStackTrace();
+        }finally {
+            return "admin/blogTypeList";
+        }
+    }
+
+    @PostMapping(value = "/addBlogType", produces = { "application/json;charset=UTF-8" })
+    @ResponseBody
+    public BlogResult addBlogType(String typeName) {
+        BlogResult result = null;
+        try {
+            adminService.addBlogType(typeName);
+            redisCache.delCacheByAddBlogType();
+            result = new BlogResult(true, true);
+        }catch (Exception e) {
+            result = new BlogResult(false, e.getMessage());
+            logger.error("addBlogType: " + e);
+            e.printStackTrace();
+        }finally {
+            return result;
+        }
+    }
+
+    @GetMapping(value = "/blogTag")
+    public String goBlogTagList(@RequestParam(value="pageNum",defaultValue="1",required=false)int pageNum,
+                                 Model model) {
+        try {
+            Page page = adminService.getBlogTagList(pageNum);
+            model.addAttribute("page", page);
+        }catch (Exception e) {
+            logger.error("goBlogTagList: " + e);
+            e.printStackTrace();
+        }finally {
+            return "admin/blogTagList";
+        }
+    }
+
+    @PostMapping(value = "/addBlogTag", produces = { "application/json;charset=UTF-8" })
+    @ResponseBody
+    public BlogResult addBlogTag(String tagName) {
+        BlogResult result = null;
+        try {
+            adminService.addBlogTag(tagName);
+            redisCache.delCacheByAddBlogTag();
+            result = new BlogResult(true, true);
+        }catch (Exception e) {
+            result = new BlogResult(false, e.getMessage());
+            logger.error("addBlogTag: " + e);
+            e.printStackTrace();
+        }finally {
+            return result;
+        }
+    }
+
 }
