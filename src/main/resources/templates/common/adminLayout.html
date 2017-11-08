@@ -26,7 +26,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="javascript:void(0);" th:if="${session.SPRING_SECURITY_CONTEXT}" th:text="${session.SPRING_SECURITY_CONTEXT.authentication.principal.username}">admin</a>
+            <a class="navbar-brand" href="/blog" th:if="${session.SPRING_SECURITY_CONTEXT}" th:text="${session.SPRING_SECURITY_CONTEXT.authentication.principal.username}">admin</a>
         </div>
         <!--<div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">

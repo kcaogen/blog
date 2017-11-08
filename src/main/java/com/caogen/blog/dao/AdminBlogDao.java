@@ -73,4 +73,6 @@ public interface AdminBlogDao {
     List<BlogTag> getBlogTag(@Param("offset") int offset, @Param("pageSize") int pageSize);
 
     void insertBlogTag(@Param("tagName") String tagName);
+
+    void updateBlogImg(@Param("blogImg") String blogImg, @Param("blogId") long blogId);
 }

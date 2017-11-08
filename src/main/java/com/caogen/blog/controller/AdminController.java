@@ -198,4 +198,21 @@ public class AdminController {
         }
     }
 
+    @PostMapping(value = "/blog/updateImg", produces = { "application/json;charset=UTF-8" })
+    @ResponseBody
+    public BlogResult updateBlogImg(String blogImg, long blogId) {
+        BlogResult result = null;
+        try {
+            adminService.updateBlogImg(blogImg, blogId);
+            redisCache.delCacheByUpdateBlogImg(String.valueOf(blogId));
+            result = new BlogResult(true, true);
+        }catch (Exception e) {
+            result = new BlogResult(false, e.getMessage());
+            logger.error("addBlogTag: " + e);
+            e.printStackTrace();
+        }finally {
+            return result;
+        }
+    }
+
 }

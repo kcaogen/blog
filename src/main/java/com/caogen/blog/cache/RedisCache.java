@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -31,6 +32,9 @@ public class RedisCache{
 
     @Resource
     private BlogService blogService;
+
+    @Value("${qiniuyun.url}")
+    private String url;
 
     private final int pageCount = 5;
 
@@ -163,7 +167,7 @@ public class RedisCache{
             Blog blog;
             if(StringUtils.isEmpty(blogInfo)){
                 blog = blogService.getBlogInfoById(Integer.parseInt(blogId));
-                blog.setBlogImg("images" + (new Random().nextInt(9) + 1) + ".jpg");
+                blog.setBlogImg(url + blog.getBlogImg());
                 jedis.hset(blogInfoKey, blogId, mapper.writeValueAsString(blog));
             }else{
                 blog = mapper.readValue(blogInfo, Blog.class);
@@ -220,7 +224,7 @@ public class RedisCache{
                 Blog blog;
                 if(StringUtils.isEmpty(blogInfo)){
                     blog = blogService.getBlogInfoById(Integer.parseInt(blogId));
-                    blog.setBlogImg("images" + (new Random().nextInt(9) + 1) + ".jpg");
+                    blog.setBlogImg(url + blog.getBlogImg());
                     jedis.hset(blogInfoKey, blogId, mapper.writeValueAsString(blog));
                 }else{
                     blog = mapper.readValue(blogInfo, Blog.class);
@@ -381,7 +385,7 @@ public class RedisCache{
                 String blogInfo = jedis.hget(blogInfoKey, blogId);
                 if(StringUtils.isEmpty(blogInfo)){
                     blog = blogService.getBlogInfoById(Integer.parseInt(blogId));
-                    blog.setBlogImg("images" + (new Random().nextInt(9) + 1) + ".jpg");
+                    blog.setBlogImg(url + blog.getBlogImg());
                     jedis.hset(blogInfoKey, blogId, mapper.writeValueAsString(blog));
                 }else{
                     blog = mapper.readValue(blogInfo, Blog.class);
@@ -430,6 +434,21 @@ public class RedisCache{
             jedis.del(RedisKeyEnum.BLOGLISTBYNEW.toString());
             jedis.hdel(RedisKeyEnum.BLOGINFO.toString(), blogId);
             jedis.hdel(RedisKeyEnum.BLOGTAGGROUP.toString(), blogId);
+        }catch (Exception e) {
+            logger.error("delCacheByUpdateBlog:" + e);
+            e.printStackTrace();
+        }finally {
+            jedisClose(jedis);
+        }
+    }
+
+    /**
+     * 修改博客图片之后有些缓存需要清除以便重新生成
+     */
+    public void delCacheByUpdateBlogImg(String blogId) {
+        Jedis jedis = jedisPool.getResource();
+        try {
+            jedis.hdel(RedisKeyEnum.BLOGINFO.toString(), blogId);
         }catch (Exception e) {
             logger.error("delCacheByUpdateBlog:" + e);
             e.printStackTrace();

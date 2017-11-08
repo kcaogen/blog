@@ -47,7 +47,7 @@ public class UploadController {
 
     @PostMapping(value = "/upload", produces = { "application/json;charset=UTF-8" })
     @ResponseBody
-    public HashMap<String,Object> uploadfile(@RequestParam(value = "editormd-image-file", required = false) MultipartFile attach,
+    public HashMap<String,Object> uploadfileByEditormd(@RequestParam(value = "editormd-image-file", required = false) MultipartFile attach,
                                  HttpServletResponse response){
         HashMap <String,Object> map = new HashMap <>();
         try {
@@ -63,7 +63,7 @@ public class UploadController {
             //最终文件名
             String originalFilename = attach.getOriginalFilename();
             String fileNameSuffix = originalFilename.substring(originalFilename.lastIndexOf("."));
-            String fileName = "kcaogen_" + System.currentTimeMillis() + fileNameSuffix.toLowerCase();
+            String fileName = "editormd" + System.currentTimeMillis() + fileNameSuffix.toLowerCase();
             File realFile=new File(path+File.separator+fileName);
             FileUtils.copyInputStreamToFile(attach.getInputStream(), realFile);
 
@@ -80,6 +80,45 @@ public class UploadController {
         } catch (Exception e) {
             map.put("success", 0);
             map.put("message", "上传失败");
+            logger.error("uploadfile:" + e);
+            e.printStackTrace();
+        }finally {
+            return map;
+        }
+    }
+
+    @PostMapping(value = "/uploadFile", produces = { "application/json;charset=UTF-8" })
+    @ResponseBody
+    public HashMap<String,Object> uploadfile(@RequestParam(value = "file", required = false) MultipartFile attach,
+                                             HttpServletResponse response){
+        HashMap <String,Object> map = new HashMap <>();
+        try {
+
+            /**
+             * 文件路径不存在则需要创建文件路径
+             */
+            File filePath=new File(path);
+            if(!filePath.exists()){
+                filePath.mkdirs();
+            }
+
+            //最终文件名
+            String originalFilename = attach.getOriginalFilename();
+            String fileNameSuffix = originalFilename.substring(originalFilename.lastIndexOf("."));
+            String fileName = "show_" + System.currentTimeMillis() + fileNameSuffix.toLowerCase();
+            File realFile=new File(path+File.separator+fileName);
+            FileUtils.copyInputStreamToFile(attach.getInputStream(), realFile);
+
+            //上传到本地之后再上传到七牛云加速
+            String url = uploadByQiNiu(path, fileName);
+
+            //解决IFrame拒绝的问题
+            response.setHeader("X-Frame-Options", "SAMEORIGIN");
+
+            map.put("success", "上传成功");
+            map.put("filename", fileName);
+        } catch (Exception e) {
+            map.put("error", "上传失败");
             logger.error("uploadfile:" + e);
             e.printStackTrace();
         }finally {

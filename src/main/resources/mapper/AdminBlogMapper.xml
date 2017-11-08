@@ -93,4 +93,8 @@
         INSERT INTO k_blogtag(tagName) VALUES (#{tagName})
     </insert>
 
+    <update id="updateBlogImg">
+        UPDATE k_blog SET blogImg = #{blogImg} WHERE blogId = #{blogId}
+    </update>
+
 </mapper>

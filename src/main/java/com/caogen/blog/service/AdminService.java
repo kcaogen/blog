@@ -44,4 +44,6 @@ public interface AdminService {
     Page getBlogTagList(int pageNum);
 
     void addBlogTag(String tagName);
+
+    void updateBlogImg(String blogImg, long blogId);
 }

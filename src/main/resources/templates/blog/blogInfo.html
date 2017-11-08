@@ -33,7 +33,7 @@
         <div th:if="${blogInfo.blog.reprintedUrl } != ''">
             <span >转载链接 </span><a th:href="@{${blogInfo.blog.reprintedUrl }}" style="cursor: pointer;" target="_blank" th:text="${blogInfo.blog.blogName }"> </a>
         </div>
-        <img th:src="@{'/image/' + ${blogInfo.blog.blogImg }}" class="img-responsive"/>
+        <img th:src="@{${blogInfo.blog.blogImg }}" class="img-responsive"/>
         <p id="content">
             <textarea style="display:none;" name="editormd-markdown-doc" th:text="${blogInfo.blog.content }"></textarea>
         </p>

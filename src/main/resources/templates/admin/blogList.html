@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>博客列表</title>
+    <link rel="stylesheet" href="/css/fileinput.min.css" />
+    <script src="/js/fileinput.min.js"></script>
     <script src="/js/admin/blogList.js" ></script>
     <script th:inline="javascript">
         var token = [[${_csrf.token}]];
@@ -37,6 +39,7 @@
                 <th>名称</th>
                 <th>类型</th>
                 <th>访问量</th>
+                <th>图片</th>
                 <th>时间</th>
                 <th>操作</th>
             </tr>
@@ -47,16 +50,43 @@
                 <td th:text="${blog.blogName}">Java历史</td>
                 <td th:text="${blog.blogType}">Java</td>
                 <td th:text="${blog.browse}">1000</td>
+                <td><img style="width: 300px;height: 100px;" th:src="${blog.blogImg}"></td>
                 <td th:text="${#dates.format(blog.time, 'yyyy-MM-dd HH:mm:ss')}">2017-08-04</td>
                 <td th:attr="blogId=${blog.blogId},blogType=${blog.blogType}">
                     <button class="btn-primary updateBlog">修改</button>
                     <button class="btn-danger delBlog">删除</button>
+                    <button type="button" class="btn-info" data-toggle="modal" data-target="#exampleModal">
+                        图片
+                    </button>
                 </td>
             </tr>
             </tbody>
         </table>
     </div>
     <nav th:replace="common/pagination :: pagination"></nav>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">博客图片</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="file-loading">
+                        <input id="inputFile" name="file" type="file">
+                    </div>
+                    <div id="kartik-file-errors"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" title="Your custom upload logic" id="updateImg">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 </html>

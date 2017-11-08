@@ -7,6 +7,7 @@ import com.caogen.blog.entity.BlogTag;
 import com.caogen.blog.entity.BlogType;
 import com.caogen.blog.enums.PageEnum;
 import com.caogen.blog.service.AdminService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,12 +23,18 @@ public class AdminServiceImpl implements AdminService {
     @Resource
     private AdminBlogDao adminBlogDao;
 
+    @Value("${qiniuyun.url}")
+    private String url;
+
     @Override
     public Page getBlogList(int pageNum, String name) {
         name = name.trim();
         long count = adminBlogDao.getBlogCount(name);
         Page page = new Page(PageEnum.PageSize.getPageSize(), count,pageNum);
         List<Blog> blogList = adminBlogDao.getBlog(page.getOffSet(), page.getPageSize(), name);
+        for (int i = 0; i < blogList.size(); i++) {
+            blogList.get(i).setBlogImg(url + blogList.get(i).getBlogImg());
+        }
         page.setResult(blogList);
         return page;
     }
@@ -132,6 +139,11 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public void addBlogTag(String tagName) {
         adminBlogDao.insertBlogTag(tagName);
+    }
+
+    @Override
+    public void updateBlogImg(String blogImg, long blogId){
+        adminBlogDao.updateBlogImg(blogImg, blogId);
     }
 
 }
