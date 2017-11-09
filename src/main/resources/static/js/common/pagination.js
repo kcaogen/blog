@@ -22,7 +22,7 @@ var pagination = {
 
     funcUrlDel : function (name) {
         var loca = window.location;
-        var baseUrl = loca.origin + loca.pathname + "?";
+        var baseUrl = loca.protocol + "//" + loca.host + loca.pathname + "?";
         var query = loca.search.substr(1);
         if (query.indexOf(name)>-1) {
             var obj = {}

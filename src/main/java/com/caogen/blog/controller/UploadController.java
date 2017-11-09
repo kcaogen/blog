@@ -63,7 +63,7 @@ public class UploadController {
             //最终文件名
             String originalFilename = attach.getOriginalFilename();
             String fileNameSuffix = originalFilename.substring(originalFilename.lastIndexOf("."));
-            String fileName = "editormd" + System.currentTimeMillis() + fileNameSuffix.toLowerCase();
+            String fileName = "editormd_" + System.currentTimeMillis() + fileNameSuffix.toLowerCase();
             File realFile=new File(path+File.separator+fileName);
             FileUtils.copyInputStreamToFile(attach.getInputStream(), realFile);
 
