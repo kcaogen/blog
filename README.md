@@ -20,7 +20,7 @@
 
 - Solr
 
-- 七牛云 （图片和视频都通过七牛云托管）
+- 七牛云 （图片和视频都通过七牛云托管加速）
 
 - Docker(可有可无)
 
@@ -41,6 +41,16 @@
 - Thymeleaf （[Java模板引擎库](http://www.jianshu.com/p/ee177796702e "Java模板引擎库")）
 
 - Editor.md （[开源在线 Markdown 编辑器](https://pandao.github.io/editor.md/ "开源在线 Markdown 编辑器")）
+
+- ECharts （[百度可视化插件](http://echarts.baidu.com/ "百度可视化插件")）
+
+# 下载使用
+
+运行项目sql文件夹下的blog.sql，创建表和插入数据即可使用。
+
+后端默认账号密码是admin
+
+使用过程请修改application.yml的qiniuyun配置
 
 # License
 
