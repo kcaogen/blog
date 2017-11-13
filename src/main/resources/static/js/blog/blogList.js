@@ -1,7 +1,11 @@
 var blogList = {
 
     init : function (params) {
-        blogList.ajaxBlogList(params);
+        if (params.keywords == null) {
+            blogList.ajaxBlogList(params);
+        }else {
+            blogList.ajaxBlogListBySolr(params);
+        }
         $(".load-more").click(function(){
             blogList.loadMore(params);
         });
@@ -10,6 +14,9 @@ var blogList = {
     URL : {
         blogList : function () {
             return "/blog/list";
+        },
+        blogListBySolr : function () {
+            return "/blog/listBySolr";
         }
     },
 
@@ -21,6 +28,29 @@ var blogList = {
             url: blogList.URL.blogList(),
             headers: headers,
             data: {"page": params.page, "blogType": params.blogType},
+            success:function(data){
+                if(data.result==true){
+                    blogList.loadBlogInfo(data.data);
+                    if(params.page >= params.maxPage){
+                        $(".pager").hide();
+                    }else{
+                        $(".pager").show();
+                    }
+                }else{
+                    layer.msg(data.error, function(){});
+                }
+            }
+        });
+    },
+
+    ajaxBlogListBySolr : function (params) {
+        var headers = {};
+        headers['X-CSRF-TOKEN'] = params.token;
+        $.ajax({
+            type: "POST",
+            url: blogList.URL.blogListBySolr(),
+            headers: headers,
+            data: {"page": params.page, "keywords": params.keywords},
             success:function(data){
                 if(data.result==true){
                     blogList.loadBlogInfo(data.data);
@@ -68,7 +98,11 @@ var blogList = {
         if(params.page > params.maxPage){
             return false;
         }
-        blogList.ajaxBlogList(params);
+        if (params.keywords == null) {
+            blogList.ajaxBlogList(params);
+        }else {
+            blogList.ajaxBlogListBySolr(params);
+        }
     }
 
 

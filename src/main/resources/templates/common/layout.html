@@ -26,7 +26,7 @@
                 <div class="form-group">
                     <input type="text" class="form-control" placeholder="Search" id="keywords"/>
                 </div>
-                <button type="button" class="btn btn-default">Submit</button>
+                <button type="button" class="btn btn-default" id="search">Submit</button>
             </form>
             <ul class="nav navbar-nav">
                 <li class="active"><a href="/blog">Blog</a></li>
@@ -112,7 +112,8 @@
 <script th:inline="javascript">
     $(function () {
         layout.init({
-            blogType : [[${blogType}]]
+            blogType : [[${blogType}]],
+            keywords : [[${keywords}]]
         });
     })
 </script>

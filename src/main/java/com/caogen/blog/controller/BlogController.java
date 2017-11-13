@@ -5,6 +5,7 @@ import com.caogen.blog.dto.BlogResult;
 import com.caogen.blog.entity.Blog;
 import com.caogen.blog.entity.BlogTag;
 import com.caogen.blog.entity.BlogType;
+import com.caogen.blog.index.SolrIndex;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -24,6 +25,9 @@ public class BlogController {
 
     @Resource
     private RedisCache redisCache;
+
+    @Resource
+    private SolrIndex solrIndex;
 
     /**
      * right页面的内容
@@ -88,6 +92,30 @@ public class BlogController {
     }
 
     /**
+     * 跳转到博客列表（带搜索条件）
+     * @param model
+     * @return
+     */
+    @GetMapping(value = "/solr/{keywords}")
+    public String goBlogBySolr(Model model,
+                         @PathVariable("keywords") String keywords) {
+        try {
+            long blogNum = redisCache.getBlogNum();
+            long page = solrIndex.getBlogPage(keywords);
+
+            model.addAttribute("keywords", keywords);
+            model.addAttribute("blogNum", blogNum);
+            model.addAttribute("page", page);
+            rightContent(model);
+        }catch (Exception e) {
+            logger.error("goBlogBySolr:" + e);
+            e.printStackTrace();
+        }finally {
+            return "blog/blogList";
+        }
+    }
+
+    /**
      * 获取博客列表数据
      * @param page
      * @param blogType
@@ -110,6 +138,34 @@ public class BlogController {
         }catch (Exception e) {
             result = new BlogResult(false, e.getMessage());
             logger.error("getBlogList:" + e);
+            e.printStackTrace();
+        }finally {
+            return  result;
+        }
+
+    }
+
+    /**
+     * 获取博客列表数据
+     * @param page
+     * @param keywords
+     * @return
+     */
+    @PostMapping(value = "/listBySolr", produces = { "application/json;charset=UTF-8" })
+    @ResponseBody
+    public BlogResult getBlogListBySolr(@RequestParam(value="page",defaultValue="1",required=false)int page,
+                                  @RequestParam(value="keywords",defaultValue="",required=false) String keywords) {
+        BlogResult result = null;
+        try {
+            List<HashMap<String, Object>> blogInfoList = solrIndex.querySolr(keywords, page);
+            if(blogInfoList == null || blogInfoList.isEmpty()){
+                result = new BlogResult(false, "没有跟 " + keywords + " 匹配的博客！");
+                return result;
+            }
+            result = new BlogResult(true, blogInfoList);
+        }catch (Exception e) {
+            result = new BlogResult(false, e.getMessage());
+            logger.error("getBlogListBySolr:" + e);
             e.printStackTrace();
         }finally {
             return  result;

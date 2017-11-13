@@ -26,6 +26,9 @@ spring:
     multipart:
       max-file-size: 5MB
       max-request-size: 100MB
+  data:
+    solr:
+      host: http://${ip}:8983/solr/caogen_core
 
 mybatis:
   config-location: classpath:mybatis-config.xml

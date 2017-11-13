@@ -6,6 +6,7 @@ import com.caogen.blog.dto.Page;
 import com.caogen.blog.entity.Blog;
 import com.caogen.blog.entity.BlogTag;
 import com.caogen.blog.entity.BlogType;
+import com.caogen.blog.index.SolrIndex;
 import com.caogen.blog.service.AdminService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,6 +29,9 @@ public class AdminController {
 
     @Resource
     private RedisCache redisCache;
+
+    @Resource
+    private SolrIndex solrIndex;
 
     @GetMapping(value = "")
     public String goIndex() {
@@ -209,6 +213,23 @@ public class AdminController {
         }catch (Exception e) {
             result = new BlogResult(false, e.getMessage());
             logger.error("addBlogTag: " + e);
+            e.printStackTrace();
+        }finally {
+            return result;
+        }
+    }
+
+    @GetMapping(value = "/solrUpdate", produces = { "application/json;charset=UTF-8" })
+    @ResponseBody
+    public BlogResult solrUpdate() {
+        BlogResult result = null;
+        try {
+            solrIndex.deleteDocument();
+            solrIndex.addBlogDoc();
+            result = new BlogResult(true, true);
+        }catch (Exception e) {
+            result = new BlogResult(false, e.getMessage());
+            logger.error("solrUpdate: " + e);
             e.printStackTrace();
         }finally {
             return result;

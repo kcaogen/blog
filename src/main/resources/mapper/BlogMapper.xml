@@ -49,7 +49,7 @@
 	</update>
 	
 	<select id="getTagList" resultType="java.util.HashMap">
-		SELECT tagName, blogId FROM k_blogTag kb
+		SELECT tagName, blogId FROM k_blogtag kb
 		INNER JOIN k_blog_tag kbt ON kb.tagId = kbt.tagId
 	</select>
 </mapper>

@@ -30,7 +30,7 @@ public class AdminServiceImpl implements AdminService {
     public Page getBlogList(int pageNum, String name) {
         name = name.trim();
         long count = adminBlogDao.getBlogCount(name);
-        Page page = new Page(PageEnum.PageSize.getPageSize(), count,pageNum);
+        Page page = new Page(PageEnum.adminPageSize.getPageSize(), count,pageNum);
         List<Blog> blogList = adminBlogDao.getBlog(page.getOffSet(), page.getPageSize(), name);
         for (int i = 0; i < blogList.size(); i++) {
             blogList.get(i).setBlogImg(url + blogList.get(i).getBlogImg());
@@ -116,7 +116,7 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public Page getBlogTypeList(int pageNum) {
         long count = adminBlogDao.getBlogTypeCount();
-        Page page = new Page(PageEnum.PageSize.getPageSize(), count,pageNum);
+        Page page = new Page(PageEnum.adminPageSize.getPageSize(), count,pageNum);
         List<BlogType> blogTypeList = adminBlogDao.getBlogType(page.getOffSet(), page.getPageSize());
         page.setResult(blogTypeList);
         return page;
@@ -130,7 +130,7 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public Page getBlogTagList(int pageNum) {
         long count = adminBlogDao.getBlogTagCount();
-        Page page = new Page(PageEnum.PageSize.getPageSize(), count,pageNum);
+        Page page = new Page(PageEnum.adminPageSize.getPageSize(), count,pageNum);
         List<BlogTag> blogTagList = adminBlogDao.getBlogTag(page.getOffSet(), page.getPageSize());
         page.setResult(blogTagList);
         return page;

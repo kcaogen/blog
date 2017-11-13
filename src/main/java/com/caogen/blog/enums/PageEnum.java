@@ -1,7 +1,8 @@
 package com.caogen.blog.enums;
 
 public enum PageEnum {
-    PageSize(10);
+    adminPageSize(10),
+    blogPageSize(5);
 
     private int pageSize;
 

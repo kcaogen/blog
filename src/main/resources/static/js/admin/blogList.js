@@ -39,9 +39,11 @@ var blogList = {
         $("#blogSearch").click(function(){
             blogList.search();
         });
-        $(document).keydown(function(e) {
-            if (e.keyCode == 13) {
+
+        $("#blogCondition").keydown(function(event){
+            if(event.which == "13") {
                 blogList.search();
+                return false;
             }
         });
     },
