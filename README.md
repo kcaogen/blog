@@ -8,6 +8,10 @@
 
 如果你觉得这个项目不错，请为它点赞  [Star](https://github.com/IsResultXaL/blog/stargazers "Star")
 
+# 博客演示
+
+https://cdn.kcaogen.com/blogShow.mp4
+
 # 运行环境
 
 - JDK 7 以上
