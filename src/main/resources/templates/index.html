@@ -8,15 +8,33 @@
 </head>
 <body>
 <div>
-    <video poster="https://cdn.kcaogen.com/index.jpg" autoplay muted loop class="vidbacking">
-        <source src="https://cdn.kcaogen.com/index.mp4" type="video/mp4">
-    </video>
-    <div class="video-back">
-        <div class="center">
-            <a href="/blog">blog</a>
+    <section class="indeCnt">
+        <div class="app_mask" id="app">
+            <div class="app_mask_cnt"> <span class="l-loading"></span> </div>
         </div>
-    </div>
+        <div class="index-aboutme gallayer zoom-show" >
 
+        </div>
+        <video poster="https://cdn.kcaogen.com/index.jpg" autoplay muted loop class="vidbacking">
+            <source src="https://cdn.kcaogen.com/index.mp4" type="video/mp4">
+        </video>
+
+        <div class="scroll_play_wave_button" style="cursor: pointer; ">
+            <div class="pulse_holder">
+                <div class="pulse_marker">
+                    <div class="scroll_cir">
+                        <div class="scroll_cir2"></div>
+                        <span class="percentage" style="font-size: 24px;"> blog</span>
+                        <div class="cir0"></div>
+                        <div class="cir1"></div>
+                        <div class="cir2"></div>
+                        <div class="cir3"></div>
+                        <div class="cir4" onclick="location.href='/blog'"></div>
+                    </div>
+                </div>
+            </div> <!-- / pulse_holder -->
+        </div>
+    </section>
 </div>
 
 <script src="/js/jquery-2.0.3.min.js"></script>
@@ -26,7 +44,16 @@
         $('body').vidbacking({
             'masked': true
         });
+        var s=document.getElementsByClassName('app_mask')[0];
+        setTimeout(function() {
+            s.className+=' app_mask_out'
+        },500);
+        setTimeout(function() {
+            s=document.getElementById("app")
+            s.remove();
+        },1100);
     });
+
 </script>
 </body>
 </html>
