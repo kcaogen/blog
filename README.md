@@ -10,7 +10,7 @@
 
 # 博客演示
 
-![image](https://cdn.kcaogen.com/blogShow.gif)
+![image](https://github.com/IsResultXaL/blog/blob/master/blogShow.gif)
 
 https://cdn.kcaogen.com/blogShow.mp4
 
