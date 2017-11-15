@@ -167,7 +167,7 @@ public class RedisCache{
             Blog blog;
             if(StringUtils.isEmpty(blogInfo)){
                 blog = blogService.getBlogInfoById(Integer.parseInt(blogId));
-                blog.setBlogImg(url + blog.getBlogImg());
+                if(blog != null)blog.setBlogImg(url + blog.getBlogImg());
                 jedis.hset(blogInfoKey, blogId, mapper.writeValueAsString(blog));
             }else{
                 blog = mapper.readValue(blogInfo, Blog.class);
@@ -183,7 +183,7 @@ public class RedisCache{
                 tagList = mapper.readValue(tagInfo, javaType);
             }
 
-            blog.setBrowse((int) new Double(jedis.zscore(blogScoreKey, blogId)==null ? 0 : jedis.zscore(blogScoreKey, blogId)).longValue());
+            if(blog != null)blog.setBrowse((int) new Double(jedis.zscore(blogScoreKey, blogId)==null ? 0 : jedis.zscore(blogScoreKey, blogId)).longValue());
             param.put("blog", blog);
             param.put("tagList", tagList);
         }catch (Exception e) {
@@ -224,7 +224,7 @@ public class RedisCache{
                 Blog blog;
                 if(StringUtils.isEmpty(blogInfo)){
                     blog = blogService.getBlogInfoById(Integer.parseInt(blogId));
-                    blog.setBlogImg(url + blog.getBlogImg());
+                    if(blog != null)blog.setBlogImg(url + blog.getBlogImg());
                     jedis.hset(blogInfoKey, blogId, mapper.writeValueAsString(blog));
                 }else{
                     blog = mapper.readValue(blogInfo, Blog.class);
@@ -240,7 +240,7 @@ public class RedisCache{
                     tagList = mapper.readValue(tagInfo, javaType);
                 }
 
-                blog.setBrowse((int) new Double(jedis.zscore(blogScoreKey, blogId)==null ? 0 : jedis.zscore(blogScoreKey, blogId)).longValue());
+                if(blog != null)blog.setBrowse((int) new Double(jedis.zscore(blogScoreKey, blogId)==null ? 0 : jedis.zscore(blogScoreKey, blogId)).longValue());
                 param.put("blog", blog);
                 param.put("tagList", tagList);
                 list.add(param);
@@ -385,7 +385,7 @@ public class RedisCache{
                 String blogInfo = jedis.hget(blogInfoKey, blogId);
                 if(StringUtils.isEmpty(blogInfo)){
                     blog = blogService.getBlogInfoById(Integer.parseInt(blogId));
-                    blog.setBlogImg(url + blog.getBlogImg());
+                    if(blog != null)blog.setBlogImg(url + blog.getBlogImg());
                     jedis.hset(blogInfoKey, blogId, mapper.writeValueAsString(blog));
                 }else{
                     blog = mapper.readValue(blogInfo, Blog.class);

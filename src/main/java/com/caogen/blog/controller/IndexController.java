@@ -22,4 +22,9 @@ public class IndexController {
         return "error/404";
     }
 
+    @GetMapping(value = "/error/500")
+    public String go500() {
+        return "error/500";
+    }
+
 }
