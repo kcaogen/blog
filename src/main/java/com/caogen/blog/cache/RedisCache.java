@@ -156,6 +156,7 @@ public class RedisCache{
      * @return
      */
     public HashMap<String, Object> getBlogInfo(String blogId){
+        if(Integer.parseInt(blogId) <= 0) return null;
         String blogInfoKey = RedisKeyEnum.BLOGINFO.toString();
         String blogTagGroupKey = RedisKeyEnum.BLOGTAGGROUP.toString();
         String blogScoreKey = RedisKeyEnum.BLOGSCORE.toString();
@@ -167,8 +168,10 @@ public class RedisCache{
             Blog blog;
             if(StringUtils.isEmpty(blogInfo)){
                 blog = blogService.getBlogInfoById(Integer.parseInt(blogId));
-                if(blog != null)blog.setBlogImg(url + blog.getBlogImg());
-                jedis.hset(blogInfoKey, blogId, mapper.writeValueAsString(blog));
+                if(blog != null){
+                    blog.setBlogImg(url + blog.getBlogImg());
+                    jedis.hset(blogInfoKey, blogId, mapper.writeValueAsString(blog));
+                }
             }else{
                 blog = mapper.readValue(blogInfo, Blog.class);
             }
@@ -261,6 +264,7 @@ public class RedisCache{
      * @return
      */
     public long getBlogNumById(String blogId){
+        if(Integer.parseInt(blogId) <= 0) return 0;
         Jedis jedis = jedisPool.getResource();
         String blogScoreKey = RedisKeyEnum.BLOGSCORE.toString();
         Double blogNum = 0.0;
