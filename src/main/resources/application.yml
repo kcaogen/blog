@@ -47,8 +47,8 @@ jedis :
       maxWaitMillis : 100000
 
 qiniuyun :
-  AK : 8X3xhJJ0f68vsOgKYFDDEQcM8SrZtYAnxAjkhx_T
-  SK : 49QhcLK_ur1yqOOrJlir1vitcTkG6eghScSR1EnA
+  AK :
+  SK :
   bucket : blog
   url : https://cdn.kcaogen.com/
 
