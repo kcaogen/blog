@@ -17,7 +17,7 @@
 <div class="container">
     <form class="form-signin" th:action="@{/login}" th:method="post">
         <h2 class="form-signin-heading">Please sign in</h2>
-        <input type="email" id="inputEmail" name="username" class="form-control" placeholder="Email address">
+        <input id="inputEmail" name="username" class="form-control" placeholder="Email address">
         <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password">
         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
         <p class="text-danger" th:if="${param.error}">Wrong user or password</p>
