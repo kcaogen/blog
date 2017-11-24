@@ -3,12 +3,11 @@ package com.caogen.blog.controller;
 import com.caogen.blog.cache.RedisCache;
 import com.caogen.blog.dto.BlogResult;
 import com.caogen.blog.entity.Blog;
-import com.caogen.blog.entity.BlogTag;
-import com.caogen.blog.entity.BlogType;
+import com.caogen.blog.entity.Tag;
+import com.caogen.blog.entity.Type;
 import com.caogen.blog.index.SolrIndex;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -34,8 +33,8 @@ public class BlogController {
      * @param model
      */
     public void rightContent(Model model){
-        List<BlogType> blogTypeList = redisCache.getBlogType();
-        List<BlogTag> blogTagList = redisCache.getBlogTag();
+        List<Type> blogTypeList = redisCache.getBlogType();
+        List<Tag> blogTagList = redisCache.getBlogTag();
         List<Blog> newBlogList = redisCache.getNewBlog();
         List<Blog> readBlogList = redisCache.getBlogByRead();
 

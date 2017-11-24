@@ -3,8 +3,8 @@ package com.caogen.blog.service.impl;
 import com.caogen.blog.dao.AdminBlogDao;
 import com.caogen.blog.dto.Page;
 import com.caogen.blog.entity.Blog;
-import com.caogen.blog.entity.BlogTag;
-import com.caogen.blog.entity.BlogType;
+import com.caogen.blog.entity.Tag;
+import com.caogen.blog.entity.Type;
 import com.caogen.blog.enums.PageEnum;
 import com.caogen.blog.service.AdminService;
 import org.springframework.beans.factory.annotation.Value;
@@ -83,7 +83,7 @@ public class AdminServiceImpl implements AdminService {
     public HashMap<String, Object> getBlog(long blogId) {
         HashMap<String, Object> map = new HashMap<>();
         Blog blog = adminBlogDao.getBlogById(blogId);
-        List<BlogTag> tagList = adminBlogDao.getBlogTagById(blogId);
+        List<Tag> tagList = adminBlogDao.getBlogTagById(blogId);
         map.put("blog", blog);
         map.put("tagList", tagList);
         return map;
@@ -117,7 +117,7 @@ public class AdminServiceImpl implements AdminService {
     public Page getBlogTypeList(int pageNum) {
         long count = adminBlogDao.getBlogTypeCount();
         Page page = new Page(PageEnum.adminPageSize.getPageSize(), count,pageNum);
-        List<BlogType> blogTypeList = adminBlogDao.getBlogType(page.getOffSet(), page.getPageSize());
+        List<Type> blogTypeList = adminBlogDao.getBlogType(page.getOffSet(), page.getPageSize());
         page.setResult(blogTypeList);
         return page;
     }
@@ -131,7 +131,7 @@ public class AdminServiceImpl implements AdminService {
     public Page getBlogTagList(int pageNum) {
         long count = adminBlogDao.getBlogTagCount();
         Page page = new Page(PageEnum.adminPageSize.getPageSize(), count,pageNum);
-        List<BlogTag> blogTagList = adminBlogDao.getBlogTag(page.getOffSet(), page.getPageSize());
+        List<Tag> blogTagList = adminBlogDao.getBlogTag(page.getOffSet(), page.getPageSize());
         page.setResult(blogTagList);
         return page;
     }

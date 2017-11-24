@@ -5,7 +5,7 @@ create table k_blog(
 	blogImg VARCHAR(50) COMMENT '博客图片名称',
 	introduction VARCHAR(1000) COMMENT '博客介绍',
 	content MEDIUMTEXT COMMENT '博客内容',
-	time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '博客创建时间',,
+	time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '博客创建时间',
 	browse INT COMMENT '浏览数量',
 	praise INT COMMENT '点赞数量',
 	blogType VARCHAR(100) COMMENT '博客类型',
@@ -13,13 +13,13 @@ create table k_blog(
 );
 
 -- 创建博客类型表
-create table k_blogType(
+create table k_type(
 	typeId INT PRIMARY KEY NOT NULL auto_increment COMMENT '博客类型id',
 	typeName VARCHAR(100) COMMENT '博客类型'
 );
 
 -- 创建博客标签表
-create table k_blogTag(
+create table k_tag(
 	tagId INT PRIMARY KEY NOT NULL auto_increment COMMENT '博客标签id',
 	tagName VARCHAR(100) COMMENT '博客标签'
 );

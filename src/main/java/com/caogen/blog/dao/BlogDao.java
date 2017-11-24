@@ -4,8 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.caogen.blog.entity.Blog;
-import com.caogen.blog.entity.BlogTag;
-import com.caogen.blog.entity.BlogType;
+import com.caogen.blog.entity.Tag;
+import com.caogen.blog.entity.Type;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -21,13 +21,13 @@ public interface BlogDao {
 	 * 获取所有博客类型
 	 * @return
 	 */
-	List<BlogType> getAllBlogType();
+	List<Type> getAllBlogType();
 	
 	/**
 	 * 获取所有博客标签
 	 * @return
 	 */
-	List<BlogTag> getAllBlogTag();
+	List<Tag> getAllBlogTag();
 	
 	/**
 	 * 通过blogId获取博客信息

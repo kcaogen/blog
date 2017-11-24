@@ -8,12 +8,12 @@
 		SELECT * FROM k_blog
 	</select>
 
-	<select id="getAllBlogType" resultType="com.caogen.blog.entity.BlogType">
-		SELECT * FROM k_blogtype
+	<select id="getAllBlogType" resultType="com.caogen.blog.entity.Type">
+		SELECT * FROM k_type
 	</select>
 
-	<select id="getAllBlogTag" resultType="com.caogen.blog.entity.BlogTag">
-		SELECT * FROM k_blogtag
+	<select id="getAllBlogTag" resultType="com.caogen.blog.entity.Tag">
+		SELECT * FROM k_tag
 	</select>
 
 	<select id="getBlogInfoById" resultType="com.caogen.blog.entity.Blog" parameterType="int">
@@ -21,7 +21,7 @@
 	</select>
 	
 	<select id="getTagListById" resultType="String" parameterType="int">
-		SELECT tagName FROM k_blogtag kb
+		SELECT tagName FROM k_tag kb
 		INNER JOIN k_blog_tag kbt ON kb.tagId = kbt.tagId
 		WHERE blogId = #{blogId}
 	</select>
@@ -49,7 +49,7 @@
 	</update>
 	
 	<select id="getTagList" resultType="java.util.HashMap">
-		SELECT tagName, blogId FROM k_blogtag kb
+		SELECT tagName, blogId FROM k_tag kb
 		INNER JOIN k_blog_tag kbt ON kb.tagId = kbt.tagId
 	</select>
 </mapper>

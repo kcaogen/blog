@@ -1,19 +1,18 @@
 package com.caogen.blog.service.impl;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
 
+import com.caogen.blog.entity.Tag;
 import com.caogen.blog.service.BlogService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.caogen.blog.dao.BlogDao;
 import com.caogen.blog.entity.Blog;
-import com.caogen.blog.entity.BlogTag;
-import com.caogen.blog.entity.BlogType;
+import com.caogen.blog.entity.Type;
 
 @Service
 @Transactional
@@ -37,7 +36,7 @@ public class BlogServiceImpl implements BlogService {
 	 * @return
 	 */
 	@Override
-	public List<BlogType> getAllBlogType() {
+	public List<Type> getAllBlogType() {
 		return blogDao.getAllBlogType();
 	}
 
@@ -46,7 +45,7 @@ public class BlogServiceImpl implements BlogService {
 	 * @return
 	 */
 	@Override
-	public List<BlogTag> getAllBlogTag() {
+	public List<Tag> getAllBlogTag() {
 		return blogDao.getAllBlogTag();
 	}
 

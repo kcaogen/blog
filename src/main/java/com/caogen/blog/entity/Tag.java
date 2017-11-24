@@ -1,7 +1,7 @@
 package com.caogen.blog.entity;
 
 @SuppressWarnings("serial")
-public class BlogTag implements java.io.Serializable {
+public class Tag implements java.io.Serializable {
 	
 	private int tagId;					//主键ID
 	
@@ -25,7 +25,7 @@ public class BlogTag implements java.io.Serializable {
 
 	@Override
 	public String toString() {
-		return "BlogTag{" +
+		return "Tag{" +
 				"tagId=" + tagId +
 				", tagName='" + tagName + '\'' +
 				'}';

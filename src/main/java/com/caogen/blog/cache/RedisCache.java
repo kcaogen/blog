@@ -1,8 +1,8 @@
 package com.caogen.blog.cache;
 
 import com.caogen.blog.entity.Blog;
-import com.caogen.blog.entity.BlogTag;
-import com.caogen.blog.entity.BlogType;
+import com.caogen.blog.entity.Tag;
+import com.caogen.blog.entity.Type;
 import com.caogen.blog.enums.RedisKeyEnum;
 import com.caogen.blog.service.BlogService;
 import com.fasterxml.jackson.databind.JavaType;
@@ -92,16 +92,16 @@ public class RedisCache{
      * 获取博客类型
      * @return
      */
-    public List<BlogType> getBlogType(){
+    public List<Type> getBlogType(){
         String blogTypeKey = RedisKeyEnum.BLOGTYPE.toString();
         Jedis jedis = jedisPool.getResource();
         ObjectMapper mapper = new ObjectMapper();
-        List<BlogType> blogTypeList = null;
+        List<Type> blogTypeList = null;
         try {
             String blogTypeJson = jedis.get(blogTypeKey);
 
             if(!StringUtils.isEmpty(blogTypeJson)){
-                JavaType javaType = mapper.getTypeFactory().constructParametricType(ArrayList.class, BlogType.class);
+                JavaType javaType = mapper.getTypeFactory().constructParametricType(ArrayList.class, Type.class);
                 blogTypeList = mapper.readValue(blogTypeJson, javaType);
             }else {
                 blogTypeList = blogService.getAllBlogType();
@@ -124,15 +124,15 @@ public class RedisCache{
      * 获取博客标签
      * @return
      */
-    public List<BlogTag> getBlogTag(){
+    public List<Tag> getBlogTag(){
         String blogTagKey = RedisKeyEnum.BLOGTAG.toString();
         Jedis jedis = jedisPool.getResource();
         ObjectMapper mapper = new ObjectMapper();
-        List<BlogTag> blogTagList = null;
+        List<Tag> blogTagList = null;
         try {
             String blogTagJson = jedis.get(blogTagKey);
             if(!StringUtils.isEmpty(blogTagJson)){
-                JavaType javaType = mapper.getTypeFactory().constructParametricType(ArrayList.class, BlogTag.class);
+                JavaType javaType = mapper.getTypeFactory().constructParametricType(ArrayList.class, Tag.class);
                 blogTagList = mapper.readValue(blogTagJson, javaType);
             }else {
                 blogTagList = blogService.getAllBlogTag();

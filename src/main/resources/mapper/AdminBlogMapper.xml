@@ -53,9 +53,9 @@
         SELECT * FROM k_blog WHERE blogId = #{blogId}
     </select>
 
-    <select id="getBlogTagById" resultType="BlogTag">
+    <select id="getBlogTagById" resultType="Tag">
         SELECT kbt.tagId, kb.tagName  FROM k_blog_tag kbt
-        INNER JOIN k_blogtag kb ON kbt.tagId = kb.tagId
+        INNER JOIN k_tag kb ON kbt.tagId = kb.tagId
         WHERE kbt.blogId = #{blogId}
     </select>
 
@@ -66,31 +66,31 @@
     </update>
 
     <select id="getBlogTypeCount" resultType="java.lang.Long">
-        SELECT COUNT(1) FROM k_blogtype
+        SELECT COUNT(1) FROM k_type
     </select>
 
     <!-- 小数据查询方式 -->
-    <select id="getBlogType" resultType="BlogType">
-        SELECT * FROM k_blogtype
+    <select id="getBlogType" resultType="Type">
+        SELECT * FROM k_type
         ORDER BY typeId DESC LIMIT #{offset}, #{pageSize}
     </select>
 
     <insert id="insertBlogType">
-        INSERT INTO k_blogtype(typeName) VALUES (#{typeName})
+        INSERT INTO k_type(typeName) VALUES (#{typeName})
     </insert>
 
     <select id="getBlogTagCount" resultType="java.lang.Long">
-        SELECT COUNT(1) FROM k_blogtag
+        SELECT COUNT(1) FROM k_tag
     </select>
 
     <!-- 小数据查询方式 -->
-    <select id="getBlogTag" resultType="BlogTag">
-        SELECT * FROM k_blogtag
+    <select id="getBlogTag" resultType="Tag">
+        SELECT * FROM k_tag
         ORDER BY tagId DESC LIMIT #{offset}, #{pageSize}
     </select>
 
     <insert id="insertBlogTag">
-        INSERT INTO k_blogtag(tagName) VALUES (#{tagName})
+        INSERT INTO k_tag(tagName) VALUES (#{tagName})
     </insert>
 
     <update id="updateBlogImg">

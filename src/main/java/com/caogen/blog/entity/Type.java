@@ -1,7 +1,7 @@
 package com.caogen.blog.entity;
 
 @SuppressWarnings("serial")
-public class BlogType implements java.io.Serializable {
+public class Type implements java.io.Serializable {
 	
 	private int typeId;					//主键ID
 	
@@ -25,7 +25,7 @@ public class BlogType implements java.io.Serializable {
 
 	@Override
 	public String toString() {
-		return "BlogType{" +
+		return "Type{" +
 				"typeId=" + typeId +
 				", typeName='" + typeName + '\'' +
 				'}';
