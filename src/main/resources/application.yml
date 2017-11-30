@@ -52,6 +52,13 @@ qiniuyun :
   bucket : blog
   url : https://cdn.kcaogen.com/
 
+github:
+  GithubID :
+  repo :
+  ClientID :
+  ClientSecret :
+
+
 security:
   user:
     name: admin

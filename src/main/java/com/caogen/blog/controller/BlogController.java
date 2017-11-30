@@ -1,6 +1,7 @@
 package com.caogen.blog.controller;
 
 import com.caogen.blog.cache.RedisCache;
+import com.caogen.blog.config.GithubConfig;
 import com.caogen.blog.dto.BlogResult;
 import com.caogen.blog.entity.Blog;
 import com.caogen.blog.entity.Tag;
@@ -27,6 +28,9 @@ public class BlogController {
 
     @Resource
     private SolrIndex solrIndex;
+
+    @Resource
+    private GithubConfig githubConfig;
 
     /**
      * right页面的内容
@@ -185,6 +189,7 @@ public class BlogController {
             HashMap<String, Object> blogInfo = redisCache.getBlogInfo(blogId);
             model.addAttribute("blogInfo", blogInfo);
             model.addAttribute("blogNum", blogNum);
+            model.addAttribute("githubConfig", githubConfig);
             rightContent(model);
         } catch (Exception e) {
             logger.error("goBlogInfo:" + e);

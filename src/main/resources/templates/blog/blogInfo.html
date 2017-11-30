@@ -44,15 +44,20 @@
         <li class="previous"><a href="javascript:history.back(-1);">&larr; 返回上一页</a></li>
     </ul>
 
-    <!--畅言PC和WAP自适应版-->
-    <div id="SOHUCS" th:attr="sid=${blogInfo.blog.blogId }" ></div>
+    <!--基于Github的Issues的评论-->
+    <div id="container"></div>
+    <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+    <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
     <script th:inline="javascript">
-        (function(){
-            var appid = 'cyt13XpXW';
-            var conf = 'prod_cefa158662e825008c7c9105b766f2cb';
-            var width = window.innerWidth || document.documentElement.clientWidth;
-            if (width < 960) {
-                window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })();
+        var gitment = new Gitment({
+            owner: [[${githubConfig.GithubID}]],
+            repo: [[${githubConfig.repo}]],
+            oauth: {
+                client_id: [[${githubConfig.ClientID}]],
+                client_secret: [[${githubConfig.ClientSecret}]],
+            },
+        })
+        gitment.render('container')
     </script>
 </div>
 </body>
