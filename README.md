@@ -50,7 +50,7 @@ https://cdn.kcaogen.com/blogShow.mp4
 
 - ECharts （[百度可视化插件](http://echarts.baidu.com/ "百度可视化插件")）
 
-- Gitment （一款基于Github的Issues的评论插件）
+- Gitment （[一款基于Github的Issues的评论插件](https://github.com/imsun/gitment "一款基于Github的Issues的评论插件")）
 
 # 下载使用
 
