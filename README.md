@@ -50,13 +50,15 @@ https://cdn.kcaogen.com/blogShow.mp4
 
 - ECharts （[百度可视化插件](http://echarts.baidu.com/ "百度可视化插件")）
 
+- Gitment （一款基于Github的Issues的评论插件）
+
 # 下载使用
 
 运行项目sql文件夹下的blog.sql，创建表和插入数据即可使用。
 
 后端默认账号密码是admin
 
-使用过程请修改application.yml的qiniuyun配置
+使用过程请修改application.yml的qiniuyun配置和github配置
 
 # License
 
