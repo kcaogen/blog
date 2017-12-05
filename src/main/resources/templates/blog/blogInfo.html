@@ -8,9 +8,13 @@
     <!--每页单独引入的文件在head里面或者html后面写,要不然只加载母版的js，不加载单独引入的 -->
     <link rel="stylesheet" href="/editormd/css/editormd.css" />
     <link rel="stylesheet" href="/editormd/css/editormd.preview.min.css" />
+    <link rel="stylesheet" href="/zoomify/zoomify.min.css" >
     <style type="text/css">
         img{
             width:100%;
+        }
+        #content{
+            overflow: visible;
         }
     </style>
 </head>
@@ -71,6 +75,7 @@
 <script src="/editormd/lib/flowchart.min.js"></script>
 <script src="/editormd/lib/jquery.flowchart.min.js"></script>
 <script src="/editormd/editormd.js"></script>
+<script src="/zoomify/zoomify.min.js"></script>
 <script th:inline="javascript">
     editormd.markdownToHTML("content", {
         htmlDecode      : "style,script,iframe",  // you can filter tags decode
@@ -82,4 +87,7 @@
         tocContainer : "",
         tocDropdown   : false
     });
+
+    $('img').zoomify(); // Default settings
+    $('img').zoomify({ duration: 1000 }); // 1s duration
 </script>

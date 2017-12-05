@@ -63,6 +63,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .ignoring()
                 .antMatchers("/css/**",
                         "/editormd/**",
+                        "/zoomify/**",
                         "/index/**",
                         "/image/**",
                         "/js/**",
